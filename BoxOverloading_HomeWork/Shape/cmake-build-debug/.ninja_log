@@ -1,0 +1,7 @@
+# ninja log v5
+5	227	7282515880338274	CMakeFiles/Shape.dir/Shape.cpp.obj	663516e381cc8a92
+2	219	7282515880245535	CMakeFiles/Shape.dir/main.cpp.obj	7ce8f7004c29eb8b
+9	227	7282514015529755	CMakeFiles/Shape.dir/Regtangle.cpp.obj	55b57e6e29eecc2
+227	299	7282515881034867	Shape.exe	353d02f0668c8178
+7	219	7282514628398859	CMakeFiles/Shape.dir/Circle.cpp.obj	12129e8125cf2944
+0	82	7284188679859561	build.ninja	ebfb5d6ae84358a3
