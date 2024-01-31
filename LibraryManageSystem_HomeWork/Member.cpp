@@ -1,16 +1,22 @@
 #include "Member.h"
 
 
-Member::Member(std::string title, Book book, std::string isbn, std::string name, int age, std::string member): book(book){
+Member::Member(std::string name, int age, std::string member) {
     setName(name);
     setAge(age);
     setMemberID(member);
-    setBook(book);
 
 }
-
-void Book::display() {
-    std::cout << getTitle() << getAutor() << getISBN();
+// functions
+void Member::display() const {
+    std::cout << "name: " << this->getName() << ", age: " << this->getAge() << ", with member id: "
+              << this->getMember() << std::endl;
+}
+void Member::borrowBook(Book *book) {
+    std::cout << "Member ";
+    this->display();
+    std::cout << "Borrow book: ";
+    book->display();
 }
 
 
@@ -25,13 +31,13 @@ void Member::setMemberID(std::string member) {
 }
 
 
-std::string Member::getName() {
-    return 0;
+std::string Member::getName() const {
+    return name;
 }
-int Member::getAge() {
-    return 0;
+int Member::getAge() const{
+    return age;
 }
-std::string Member::getMember() {
-    return 0;
+std::string Member::getMember() const{
+    return memberID;
 }
 

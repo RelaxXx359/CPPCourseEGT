@@ -7,26 +7,25 @@
 
 class Member {
 public:
-    Member(std::string, Book, std::string, std::string , int, std::string);
-
-
+// constructor
+    Member(std::string name, int age, std::string member);
+// setters
     void setName(std::string);
     void setAge(int);
     void setMemberID(std::string);
-    void setBook(Book);
-
-    std::string getName();
-    int getAge();
-    std::string getMember();
-    Book getBook();
-
-    void display();
+// getters
+    std::string getName() const;
+    int getAge() const;
+    std::string getMember() const;
+// functions
+    void display() const;
+    void    borrowBook(Book * book);
 
 private:
+// variable
     std::string name;
     int age;
     std::string memberID;
-
 };
 
 

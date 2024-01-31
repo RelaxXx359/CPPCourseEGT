@@ -13,11 +13,9 @@ void Book::display() {
 void Book::setTitle(std::string t) {
     title = t;
 }
-
 void Book::setAutor(std::string a) {
     autor = a;
 }
-
 void Book::setISBN(std::string isbn) {
     ISBN = isbn;
 }
@@ -25,11 +23,10 @@ void Book::setISBN(std::string isbn) {
 std::string Book::getTitle() {
     return title;
 }
-
 std::string Book::getAutor() {
     return autor;
 }
-
 std::string Book::getISBN() {
     return ISBN;
 }
+

@@ -17,12 +17,17 @@ public:
     void display();
 
 
+    void push_back();
+
+    void push_back(Book book);
+
 private:
     std::string title;
     std::string autor;
     std::string ISBN;
 
 
+    void display() const;
 };
 
 

@@ -2,21 +2,33 @@
 #include "Book.h"
 #include "Member.h"
 #include <vector>
+#include <string>
+
+using namespace std;
 
 int main() {
 
-    Book *b1Ptr = new Book("C++", "Herbert Schildt", "123");
-    Book *b2ptr = new Book("Pod Igoto", "Ivan Vazov", "156");
+    // create books
+    Book *book1 = new Book("C++", "Herbert Schildt", "123");
+    Book *book2 = new Book("Pod Igoto", "Ivan Vazov", "156");
 
-    std::vector<Book *> books;
-    books.push_back(b1Ptr);
-    books.push_back(b2ptr);
-//    b1Ptr->display();
-//    b2ptr->display();
-Member *m1Ptr = new Member("Stefan Stefanov", "21", "156548");
+    std::vector<Book *> book;
+    book.push_back(book1);
+    book.push_back(book2);
 
+    //create members
+    Member member1("Stefan Stefanov", 21, "156548");
+    Member member2("Ivan Ivanov", 42, "152635");
 
+    std::vector<Member> members;
+    members.push_back(member1);
+    members.push_back(member2);
 
+    for (size_t i = 0; i < members.size(); ++i) {
+        for (size_t j = book.size() - 1; j > 0; --j) {
+            members[i].borrowBook(book[j]);
+        }
+    }
 
     return 0;
 }
