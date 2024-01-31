@@ -14,12 +14,8 @@ public:
     std::string getAutor();
     std::string getISBN();
 
-    void display();
+    void display() const;
 
-
-    void push_back();
-
-    void push_back(Book book);
 
 private:
     std::string title;
@@ -27,7 +23,7 @@ private:
     std::string ISBN;
 
 
-    void display() const;
+
 };
 
 

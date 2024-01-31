@@ -6,7 +6,7 @@ Book::Book(std::string title, std::string name, std::string isbn) {
     setISBN(isbn);
 }
 
-void Book::display() {
+void Book::display() const {
     std::cout << title << " " << autor << " " << ISBN << std::endl;
 }
 
