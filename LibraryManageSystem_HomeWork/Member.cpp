@@ -1,6 +1,6 @@
 #include "Member.h"
 
-
+//construction
 Member::Member(std::string name, int age, std::string member) {
     setName(name);
     setAge(age);
@@ -19,7 +19,7 @@ void Member::borrowBook(Book *book) {
     book->display();
 }
 
-
+//setters
 void Member::setName(std::string name) {
     this->name = name;
 }
@@ -30,7 +30,7 @@ void Member::setMemberID(std::string member) {
     this->memberID = member;
 }
 
-
+//getters
 std::string Member::getName() const {
     return name;
 }
