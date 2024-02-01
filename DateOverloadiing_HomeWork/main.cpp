@@ -9,7 +9,7 @@ using std::endl;
 #include "Date.h" // Date class definition
 
 int main() {
-    Date d1; // defaults to January 1, 1900
+    Date d1; // default values
     Date d2(12, 27, 1992); // December 27, 1992
     Date d3(0, 99, 8045); // invalid date
 
@@ -35,7 +35,7 @@ int main() {
 
 
 
-    // Създаване на две кутии
+    // create two box
     Box box1(3.0, 4.0, 5.0);
     Box box2(2.0, 3.0, 4.0);
 

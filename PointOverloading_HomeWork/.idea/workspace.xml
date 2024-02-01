@@ -3,9 +3,9 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
-  <component name="CMakePresetLoader"><![CDATA[{
-  "useNewFormat": true
-}]]></component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
   <component name="CMakeReloadState">
     <option name="reloaded" value="true" />
   </component>
@@ -20,7 +20,20 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0cf09ec3-cd39-4654-b207-a95c0d57af9b" name="Changes" comment="new task" />
+    <list default="true" id="0cf09ec3-cd39-4654-b207-a95c0d57af9b" name="Changes" comment="new task">
+      <change beforePath="$PROJECT_DIR$/../LibraryManageSystem_HomeWork/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../LibraryManageSystem_HomeWork/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Point.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Point.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Point.h" beforeDir="false" afterPath="$PROJECT_DIR$/Point.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/Circle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/Circle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/Circle.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/Circle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/Regtangle.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/Regtangle.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/Regtangle.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/Regtangle.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/Shape.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/Shape.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Shape_HomeWork/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Shape_HomeWork/main.cpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,9 +51,9 @@
     <option name="majorVersion" value="2023" />
     <option name="minorVersion" value="3.3" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2bjNbLt9jrZvfkypgmuJbqFw3jv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -56,7 +69,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Dobrolyub Velinov/CPP-Projects/Even/ShuffleCards",
+    "last_opened_file_path": "C:/Users/Dobrolyub Velinov/CPPCourseEGT/LibraryManageSystem_HomeWork",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -66,11 +79,6 @@
   }
 }]]></component>
   <component name="RunManager">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PointOverloading_HomeWork" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="PointOverloading_HomeWork" TARGET_NAME="PointOverloading_HomeWork" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="PointOverloading_HomeWork" RUN_TARGET_NAME="PointOverloading_HomeWork">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -86,6 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1706724598527</updated>
       <workItem from="1706724599744" duration="1956000" />
+      <workItem from="1706767268577" duration="419000" />
     </task>
     <task id="LOCAL-00001" summary="new task">
       <option name="closed" value="true" />

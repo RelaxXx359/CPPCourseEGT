@@ -3,11 +3,12 @@
 
 #include "Shape.h"
 
-
+//create class
 class Circle : public Shape {
 public:
+    //create construction
     Circle(double sideA);
-
+//function
     void draw() override;
 
 };
