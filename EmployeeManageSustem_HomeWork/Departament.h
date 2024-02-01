@@ -7,21 +7,22 @@
 
 class Department {
 public:
-
+//construction
     Department(std::string, int);
 
     Department(Department *pDepartment);
-
+//setters
     void setDepartmentName(std::string);
     void setNumEmployee(int);
-
+//getters
     std::string getDepartmentName();
     int getNumEmployee();
-
+//function
     void addEmployees(Employee *employee);
     void displayEmployes();
 
 private:
+    //variable
     std::string departmentName;
     std::vector<Employee *> employees;
     int numEmployee;

@@ -28,6 +28,7 @@ int main() {
 
     // iterates elements members
     for (size_t i = 0; i < members.size(); ++i) {
+        //iteration book
         for (size_t j = book.size() - 1; j > 0; --j) {
             members[i].borrowBook(book[j]);
         }

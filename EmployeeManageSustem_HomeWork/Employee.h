@@ -5,19 +5,22 @@
 
 class Employee {
 public:
-    Employee(std::string, int= 0, int = 0);
 
+    //construction
+    Employee(std::string, int= 0, int = 0);
+//setters
     void setName(std::string);
     void setEmployee(int);
     void setPosition(int);
-
+//getters
     std::string getName() const;
     int getEmployee() const;
     int getPosition() const;
-
+//function
     void display() const;
 
 private:
+    //variable
     std::string name;
     int employeeID;
     int position;
