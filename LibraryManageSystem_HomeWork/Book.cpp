@@ -7,7 +7,7 @@ Book::Book(std::string title, std::string name, std::string isbn) {
 }
 //function
 void Book::display() const {
-    std::cout << title << " " << autor << " " << ISBN << std::endl;
+    std::cout << "Title:" <<this->title << " " << " Name: "<< this->autor << " " << "ISBN"<< this->ISBN << std::endl;
 }
 
 //setters

@@ -9,7 +9,7 @@ Member::Member(std::string name, int age, std::string member) {
 }
 // functions
 void Member::display() const {
-    std::cout << "name: " << this->getName() << ", age: " << this->getAge() << ", with member id: "
+    std::cout << "Name: " << this->getName() << ", age: " << this->getAge() << ", member id: "
               << this->getMember() << std::endl;
 }
 void Member::borrowBook(Book *book) {

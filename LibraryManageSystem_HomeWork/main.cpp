@@ -13,9 +13,9 @@ int main() {
     Book *book2 = new Book("Pod Igoto", "Ivan Vazov", "156");
 
     // create vector BOOK
-    std::vector<Book *> book;
-    book.push_back(book1);
-    book.push_back(book2);
+    std::vector<Book *> books;
+    books.push_back(book1);
+    books.push_back(book2);
 
     //create members
     Member member1("Stefan Stefanov", 21, "156548");
@@ -27,10 +27,10 @@ int main() {
     members.push_back(member2);
 
     // iterates elements members
-    for (size_t i = 0; i < members.size(); ++i) {
+    for (int i = 0; i < members.size(); ++i) {
         //iteration book
-        for (size_t j = book.size() - 1; j > 0; --j) {
-            members[i].borrowBook(book[j]);
+        for (int j = books.size()-1 ; j > 0; --j) {
+            members[i].borrowBook(books[j]);
         }
     }
 
