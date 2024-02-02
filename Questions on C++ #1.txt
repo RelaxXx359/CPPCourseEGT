@@ -1,0 +1,92 @@
+1.Describe what the following line of C++ code does: int* ptr = &var;.
+    Указател с цяло число с име "ptr" 
+    Pointer with intеger number with name "ptr"
+
+2.   Explain diffrence a between a while loop and a do-while loop in C++.
+    При while първо се проверява условието.
+    First the condition in checked
+
+    При do-while условието се проверява накрая.
+    In do-wihel the condition the end.
+
+3.    Give a snippet of C++ code containing a for loop, explai what the loop does,
+including how many times it iterates and why.
+
+    for(int i=0; i<5; i++){
+    std::cout << i << " ";
+    }
+
+    Цикъла итерира от 0 до 4  (4 пъти, докато условието е вярно) и принтита на конзолата с интервал .
+    Loop iteration for 0 to 4 (4 times, condition is true) print in console with interval.
+
+4. Write about how funcions prevent code duplication and give an example of a simple C++ funciton that calculates
+the square of a number.
+
+    Функцията разделя кода на по малки модули, по този начин кода става по четим.
+    Извикване то на функцията намалява дублирането.
+
+    int calculateSquare(int num){
+    return num*num;
+    }
+
+5.Discuss the importance of memory management in C++ and explain the diffrence 
+between stack and heap allcocation.
+
+    В управлението на паметта, програмистите имат контрол върху процеса на заделяне и освобождаване на памет.
+    In memory management, programmers have control over the process of allocating and freeing memory.
+
+    Стекът позволява динамично управление на паметта.
+    The stack allows dynamic memory management.
+
+    Бърз достъп и освобождаване на памет, подходящ за управление на малки количества данни 
+    Fast memory access and release, suitable for managing small amounts of data
+ 
+6.Explain the concept of encapsulation in C++ and how it is achieved using classes
+    Капсулирането сабира кода с данните и ги пази от външна намеса.
+    Encapsulation bundles the code with the data and protects it from outside interference.
+
+7.Describe how exceptions are used in C++ for error handling, with an exampleof a try-catch block
+8.Write about the purpose and use of the std::vactor container in C++.
+
+    Предоставящ динамичен масив с динамичен размер. 
+    Предлага метод като push_back за добавяне на елементи.
+    И pop_back за премахване на елементи
+    Providing a dynamic array of dynamic size.
+    Offers a method like push_back to add items.
+    And pop_back to remove items
+
+
+9.Discuss the defference between poiters and reference in C++ and provide scenatrios where one might be preferred over the other.
+
+    Указателите са променливи, които съхраняват адреси в паметта
+    За дефиниране и използване на указател се използва операторът '*'. 
+    Могат да имат стойност nullptr,
+ 
+    Референциите са псевдоними за съществуващи променливи.
+    Референциите се декларират с оператора '&'.
+    Не могат да имат нулева стойност.
+
+    Pointers are variables that store addresses in memory
+    The '*' operator is used to define and use a pointer.
+    Can have nullptr value.
+
+    References are aliases for existing variables.
+    References are declared with the '&' operator.
+    They cannot have a null value
+
+10. Explai the concept of templates in C++ and how they support genric programming. Include a simple example of a template
+function.
+
+    Шаблоните позвпляват написването на функций и класове.
+    Templates ring the writing of functions and classes.
+
+    templete<typename T>
+    T add(T a, T b){
+      return a+b;
+    }
+    int main(){
+    int result1 = add (5,3);
+    double result2 = add(3.14, 2.71);
+
+std::cout << result1 << std:: endl;
+std::cout << result2 << std:: endl; 
