@@ -24,7 +24,7 @@ public:
 private:
     //variable
     std::string departmentName;
-    std::vector<Employee *> employees;
+    Employee** employees;
     int numEmployee;
 };
 

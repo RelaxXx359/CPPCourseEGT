@@ -1,13 +1,13 @@
 #include "Employee.h"
 
-Employee::Employee(std::string name, int ID, int position) {
+Employee::Employee(std::string name, int ID, std::string position) {
     setName(name);
     setEmployee(ID);
     setPosition(position);
 }
 
 void Employee::display() const{
-    std::cout << "Name: " << getName() << "ID:" << getEmployee() << "Position: " << getPosition() << std::endl;
+    std::cout << "Name: " << getName() << " ID:" << getEmployee() << " Position: " << getPosition() << std::endl;
 }
 
 void Employee::setName(std::string n) {
@@ -16,7 +16,7 @@ void Employee::setName(std::string n) {
 void Employee::setEmployee(int id) {
     this->employeeID = id;
 }
-void Employee::setPosition(int possition) {
+void Employee::setPosition(std::string possition) {
     this->position = possition;
 }
 
@@ -27,6 +27,6 @@ std::string Employee::getName() const {
 int Employee::getEmployee() const {
     return employeeID;
 }
-int Employee::getPosition() const{
+std::string Employee::getPosition() const{
     return position;
 }

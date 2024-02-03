@@ -7,15 +7,15 @@ class Employee {
 public:
 
     //construction
-    Employee(std::string, int= 0, int = 0);
+    Employee(std::string, int , std::string);
 //setters
     void setName(std::string);
     void setEmployee(int);
-    void setPosition(int);
+    void setPosition(std::string);
 //getters
     std::string getName() const;
     int getEmployee() const;
-    int getPosition() const;
+    std::string getPosition() const;
 //function
     void display() const;
 
@@ -23,7 +23,7 @@ private:
     //variable
     std::string name;
     int employeeID;
-    int position;
+    std::string position;
 
 };
 

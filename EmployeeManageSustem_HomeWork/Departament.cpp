@@ -3,38 +3,37 @@
 Department::Department(std::string name, int num) {
     setDepartmentName(name);
     setNumEmployee(num);
+    employees = new Employee*[10];
 }
 //finction
 void Department::displayEmployes() {
-    std::cout << "Name " << getDepartmentName() << " number: " << getNumEmployee() << std::endl;
-    for (auto employee: employees) {
-        employee->display();
-
+    std::cout << "Employee is Departament " << departmentName <<  ":" << std::endl;
+    for (int i = 0; i < numEmployee; ++i) {
+        employees[i]->display();
     }
 }
-//setters
 void Department::addEmployees(Employee *employee) {
-    int num;
-    employees.push_back(employee);
-    num++;
+    if (numEmployee < 10) {
+        employees[numEmployee] = employee;
+        numEmployee++;
+    } else
+        std::cout << "Departament is full" << std::endl;
 }
+//setters
+
 void Department::setDepartmentName(std::string name) {
     this->departmentName = name;
 }
-
 void Department::setNumEmployee(int num) {
     this->employees;
 }
-
 //getters
 std::string Department::getDepartmentName() {
     return departmentName;
 }
-
 int Department::getNumEmployee() {
     return numEmployee;
 }
-
 Department::Department(Department *pDepartment) {
 
 }
