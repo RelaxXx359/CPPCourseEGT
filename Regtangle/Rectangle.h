@@ -24,7 +24,7 @@ public:
     double length();
     double width();
     double area();
-    double parameter();
+    double perimeter();
 
 private:
     //funkciq

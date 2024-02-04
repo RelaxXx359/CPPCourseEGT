@@ -7,4 +7,5 @@ add_executable(Shape04_01 main.cpp
         Point.h
         Point.cpp
         Rectangle.h
+        Rectangle.cpp
 )

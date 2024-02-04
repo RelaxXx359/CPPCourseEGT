@@ -4,25 +4,31 @@
 
 Rectangle::Rectangle(const Point &p1, const Point &p2, const Point &p3, const Point &p4) : p1(p1), p2(p2), p3(p3),
                                                                                            p4(p4) {}
-// изчисляване на дължина и ширина
-//void calculateDimensions(double length, double width) {
-//    length = std::max(std::abs( - p2), std::abs(p4 - p3));
-//    width = std::min(std::abs(y2_ - y1_), std::abs(y4_ - y3_));
-//}
 
-// Член-функции за изчисляване на периметър и площ
-double perimeter(double length, double width) {
-    return 2 * (length + width);
+double Rectangle::displayInfo() {
+    std::cout << "Coordinates of the rectangle corners: (" << p1.getX() << ", " << p1.getY() << "), (" << p2.getX() << ", " << p2.getY() << "), ("
+              << p3.getX() << ", " << p3.getY() << "), (" << p4.getX() << ", " << p4.getY() << ")"<< std::endl;
+    std::cout << "Length: " << length() << std::endl;
+    std::cout << "Width: " << width() << std::endl;
+    std::cout << "Parameter: " << perimeter() << std::endl;
+    std::cout << "Area: " << area() << std::endl;
+    std::cout << "Is square: " << (isSquare() ? "Yes" : "No" ) << std::endl;
 }
-
+double Rectangle::length() {
+    return p2.getX() - p1.getX();
+}
+double Rectangle::width() {
+    return p3.getY() - p1.getY();
+}
+// Член-функции за изчисляване на периметър и площ
+double Rectangle::perimeter() {
+    return 2* (length() + width());
+}
+double Rectangle::area() {
+    return length() * width();
+}
 bool Rectangle::isSquare() {
-    if (isRectangle()) {
-        if(calculate(p1.getX(), p2.getX() == (p1.getY(), p3.getY()))){
-
-            return true;
-        }
-    }
-    return false;
+    return length() == width();
 }
 
 

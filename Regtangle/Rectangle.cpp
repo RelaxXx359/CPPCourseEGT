@@ -10,7 +10,7 @@ double Rectangle::displayInfo() {
     << p3.getX() << ", " << p3.getY() << "), (" << p4.getX() << ", " << p4.getY() << ")"<< std::endl;
     std::cout << "Length: " << length() << std::endl;
     std::cout << "Width: " << width() << std::endl;
-    std::cout << "Parameter: " << parameter() << std::endl;
+    std::cout << "Parameter: " << perimeter() << std::endl;
     std::cout << "Area: " << area() << std::endl;
     std::cout << "Is square: " << (isSquare() ? "Yes" : "No" ) << std::endl;
 
@@ -32,7 +32,7 @@ double Rectangle::width() {
     return std::min(std::abs(p2.getY() - p1.getY()), std::abs(p4.getY() - p3.getY()));
 }
 
-double Rectangle::parameter() {
+double Rectangle::perimeter() {
     return 2 * (length() + width());
 }
 

@@ -17,6 +17,12 @@ public:
 
     bool isRectangle();
     bool isSquare();
+    double length();
+    double width();
+    double perimeter();
+    double area();
+    double displayInfo();
+
 
 private:
     Point p1;
@@ -24,7 +30,6 @@ private:
     Point p3;
     Point p4;
 
-    double calculate(double, double );
 };
 
 

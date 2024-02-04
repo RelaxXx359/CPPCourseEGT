@@ -15,7 +15,7 @@ int main() {
 
     cout << rect1.length();
     cout << rect1.width();
-    cout << rect1.parameter();
+    cout << rect1.perimeter();
     cout << rect1.area();
     cout << rect1.isSquare();
 

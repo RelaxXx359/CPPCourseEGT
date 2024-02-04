@@ -61,6 +61,12 @@ build CMakeFiles/Shape04_01.dir/Point.cpp.obj: CXX_COMPILER__Shape04_01_unscanne
   OBJECT_DIR = CMakeFiles\Shape04_01.dir
   OBJECT_FILE_DIR = CMakeFiles\Shape04_01.dir
 
+build CMakeFiles/Shape04_01.dir/Rectangle.cpp.obj: CXX_COMPILER__Shape04_01_unscanned_Debug C$:/Users/Dobrolyub$ Velinov/CPPCourseEGT/Shape04.01/Rectangle.cpp || cmake_object_order_depends_target_Shape04_01
+  DEP_FILE = CMakeFiles\Shape04_01.dir\Rectangle.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles\Shape04_01.dir
+  OBJECT_FILE_DIR = CMakeFiles\Shape04_01.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Shape04_01
@@ -69,7 +75,7 @@ build CMakeFiles/Shape04_01.dir/Point.cpp.obj: CXX_COMPILER__Shape04_01_unscanne
 #############################################
 # Link the executable Shape04_01.exe
 
-build Shape04_01.exe: CXX_EXECUTABLE_LINKER__Shape04_01_Debug CMakeFiles/Shape04_01.dir/main.cpp.obj CMakeFiles/Shape04_01.dir/Point.cpp.obj
+build Shape04_01.exe: CXX_EXECUTABLE_LINKER__Shape04_01_Debug CMakeFiles/Shape04_01.dir/main.cpp.obj CMakeFiles/Shape04_01.dir/Point.cpp.obj CMakeFiles/Shape04_01.dir/Rectangle.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Shape04_01.dir
