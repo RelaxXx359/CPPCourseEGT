@@ -13,7 +13,7 @@ void Department::displayEmployes() {
     }
 }
 void Department::addEmployees(Employee *employee) {
-    if (numEmployee < 10) {
+    if (numEmployee < 2) {
         employees[numEmployee] = employee;
         numEmployee++;
     } else

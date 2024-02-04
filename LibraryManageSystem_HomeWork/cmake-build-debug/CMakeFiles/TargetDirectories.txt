@@ -1,0 +1,3 @@
+C:/Users/Dobrolyub Velinov/CPPCourseEGT/LibraryManageSystem_HomeWork/cmake-build-debug/CMakeFiles/LibraryManageSystem_HomeWork.dir
+C:/Users/Dobrolyub Velinov/CPPCourseEGT/LibraryManageSystem_HomeWork/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dobrolyub Velinov/CPPCourseEGT/LibraryManageSystem_HomeWork/cmake-build-debug/CMakeFiles/rebuild_cache.dir

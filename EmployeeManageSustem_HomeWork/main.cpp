@@ -16,23 +16,22 @@ int main() {
     emplo.push_back(e2Ptr);
 
     // create pointer department
-    Department *dPtr = new Department("IT ",10);
+    Department *dPtr = new Department("IT ", 1);
 
     //create vector departament
-//    vector<Department *> depart;
-//    depart.push_back(dPtr);
+    vector<Department *> depart;
+    depart.push_back(dPtr);
 
     //iteration employer
-//    for (int i = 0; i < emplo.size(); ++i) {
-//        std::cout << endl;
-//        for (int j = 0; j < depart.size(); ++j) {
-//            emplo[i]->display();
-//            depart[j]->displayEmployes();
-//        }
-//    }
+    for (int j = 0; j <  depart.size(); ++j) {
+        depart[j]->displayEmployes();
+        for (int i = 0; i < emplo.size(); ++i) {
+            emplo[i]->display();
+        }
+    }
 
-    dPtr->addEmployees(ePtr);
-    dPtr->addEmployees(e2Ptr);
-    dPtr->displayEmployes();
+//    dPtr->addEmployees(ePtr);
+//    dPtr->addEmployees(e2Ptr);
+//    dPtr->displayEmployes();
     return 0;
 }

@@ -1,0 +1,1 @@
+CMakeLists.txt not found in C:\Users\Dobrolyub Velinov\CPPCourseEGT\Regtangele Select CMakeLists.txt

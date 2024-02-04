@@ -1,0 +1,22 @@
+# ninja log v5
+2	232	7286691463889234	CMakeFiles/Shop.dir/Drinks.cpp.obj	45d9c5f4a95d6416
+2	277	7286689802725468	CMakeFiles/Shop.dir/main.cpp.obj	d5d51dda2c36cd7a
+1	210	7286683039866198	CMakeFiles/Shop.dir/Alcoholic.cpp.obj	a1c83b1e0e6addd2
+232	305	7286691464529152	Shop.exe	4ee58698026dc15d
+17	66	7286814262989712	CMakeFiles/Shop.dir/Order.cpp.obj	733c948ed940d4fd
+10	259	7286814264916474	CMakeFiles/Shop.dir/Alcoholic.cpp.obj	a1c83b1e0e6addd2
+2	260	7286814264926479	CMakeFiles/Shop.dir/Drinks.cpp.obj	45d9c5f4a95d6416
+15	270	7286814265016482	CMakeFiles/Shop.dir/NonAlcoholic.cpp.obj	3ac5021ed0541638
+20	317	7286814265489164	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+2	311	7286814446950082	CMakeFiles/Shop.dir/main.cpp.obj	d5d51dda2c36cd7a
+2	288	7286814827691636	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+2	271	7286814888170842	CMakeFiles/Shop.dir/main.cpp.obj	d5d51dda2c36cd7a
+2	269	7286815480347969	CMakeFiles/Shop.dir/main.cpp.obj	d5d51dda2c36cd7a
+6	273	7286815480397967	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+4	283	7286815680560865	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+2	319	7286815900790187	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+1	272	7286816062357209	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+4	301	7286816348071260	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+2	296	7286816687902405	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7
+11	82	7287358650290341	CMakeFiles/Shop.dir/Order.cpp.obj	733c948ed940d4fd
+7	481	7287358654267617	CMakeFiles/Shop.dir/User.cpp.obj	f16ab0c62535f3c7

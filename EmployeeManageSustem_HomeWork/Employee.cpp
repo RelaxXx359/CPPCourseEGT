@@ -7,7 +7,7 @@ Employee::Employee(std::string name, int ID, std::string position) {
 }
 
 void Employee::display() const{
-    std::cout << "Name: " << getName() << " ID:" << getEmployee() << " Position: " << getPosition() << std::endl;
+        std::cout << "Name: " << getName() << " ID:" << getEmployee() << " Position: " << getPosition() << std::endl;
 }
 
 void Employee::setName(std::string n) {
