@@ -5,24 +5,20 @@ using namespace std;
 
 int main() {
     Point p1(5,5);
-    cout << p1.getX() << " ";
-    cout << p1.getY() << endl;
-
-    Point p2(15,5);
-    cout << p2.getX() << " ";
-    cout << p2.getY() << endl;
-
-    Point p3(5,15);
-    cout << p3.getX() << " ";
-    cout << p3.getY() << endl;
-
+    Point p2(15,15);
+    Point p3(5,5);
     Point p4(15,15);
-    cout << p4.getX() << " ";
-    cout << p4.getY() << endl;
 
     Rectangle rect1 (p1,p2,p3,p4);
-    cout << rect1.isRegtangle() << endl;
-    cout << rect1.isRegtangle();
+    //cout << rect1.isRegtangle() << endl;
+    cout << rect1.displayInfo();
+
+    cout << rect1.length();
+    cout << rect1.width();
+    cout << rect1.parameter();
+    cout << rect1.area();
+    cout << rect1.isSquare();
+
 
 //55
 //1515
