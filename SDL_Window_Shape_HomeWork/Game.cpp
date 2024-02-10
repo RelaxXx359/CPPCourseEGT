@@ -1,7 +1,7 @@
 ﻿
 #include "Game.h"
 #include <iostream>
-int c = 0;
+#include "Shapes.h"
 
 //метод се извиква за инициализиране на играта
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags) {
@@ -26,12 +26,7 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
                 // Задаване на цвета на фона
 
                 SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-
-                // зарежда изображение
-                //TextureManager::Instance()->loadTexture("assets/bmp.bmp", "bmp", renderer);
-                //TextureManager::Instance()->loadTexture("assets/pikachu.png", "png", renderer);
-                TextureManager::Instance()->loadTexture("assets/sprite_sheet.jpeg", "jpg", renderer);
-
+ 
 
             }
 
@@ -91,18 +86,23 @@ void Game::render() {
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
     Shapes::drawCircle(renderer, ww / 2, wh / 2, 250);
 
+    // илюстрирах петоъгълник в черно
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 250);
+    Shapes::drawPentagon(renderer, ww / 2, wh / 2, 100);
 
-  /*  TextureManager::Instance()->drawOneFrameFromeTexture("jpg", 0, 0, 130, 130, 1, currentFrame, renderer);
-    TextureManager::Instance()->drawOneFrameFromeTexture("jpg", 0, 130, 130, 130, 2, currentFrame, renderer);*/
+
+    // илюстрирах шестоъгълник в сиво
+    SDL_SetRenderDrawColor(renderer, 100, 100, 100, 250);
+    Shapes::drawHexagon(renderer, ww / 2, wh / 2, 200);
 
 
-    //TextureManager::Instance()->drawTexture("png", 0, 0, 204, 200, renderer);
-    //TextureManager::Instance()->drawTexture("png", 200, 200, 204, 200, renderer, SDL_FLIP_HORIZONTAL);
 
 
 
     SDL_RenderPresent(renderer);
 }
+
+
 // обработка на интерфейс
 void Game::handleEvents() {
     SDL_Event event;  // Създаване на обект за събитие
