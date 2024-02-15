@@ -76,6 +76,32 @@ void Game::render() {
         SDL_RenderDrawPoint(renderer, ww / 2, i);
     }
 
+    //празен правоъгълник с подадена дебелина на линиите
+    // направих го с четири триъгълника с еднакъв цвят и различни параметри 
+    SDL_GetWindowSize(window, &ww, &wh);
+    SDL_Rect fillRect1 = { 10,  10, 20 , 100 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0xFF);
+    SDL_RenderFillRect(renderer, &fillRect1);
+
+    SDL_GetWindowSize(window, &ww, &wh);
+    SDL_Rect fillRect2 = { 10,10, 150 , 20 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0xFF);
+    SDL_RenderFillRect(renderer, &fillRect2);
+
+    SDL_GetWindowSize(window, &ww, &wh);
+    SDL_Rect fillRect3 = { 10, 100, 150 , 20 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0xFF);
+    SDL_RenderFillRect(renderer, &fillRect3);
+
+    SDL_GetWindowSize(window, &ww, &wh);
+    SDL_Rect fillRect4 = { 150, 10, 20 , 110 };
+    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 0xFF);
+    SDL_RenderFillRect(renderer, &fillRect4);
+
+
+
+
+
     // мъничка точка в горен десен ъгъл
     SDL_Point p ={10,20};
     SDL_RenderDrawPoint(renderer, p.x, p.y);
