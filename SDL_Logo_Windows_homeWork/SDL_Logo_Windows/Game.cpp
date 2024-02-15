@@ -87,19 +87,19 @@ void Game::render() {
 
 	//SDL_RenderCopy(renderer, texture, &imageRectangle, &windowRectangle);
 	//TextureManager::Instance()->drawOneFrameTexture("jpg", 0, 130, 130, 130, 2, currentFrame, renderer);
-	TextureManager::Instance()->drawTexture("jpg1", 0, 0, ww/2, wh/2, renderer);
-	TextureManager::Instance()->drawTexture("jpg2", wh/2, 0, ww / 2, wh/2, renderer);
-	TextureManager::Instance()->drawTexture("jpg3", 0, ww /2, wh /2, ww /2, renderer);
-	TextureManager::Instance()->drawTexture("jpg4", wh /2, ww /2, wh /2, ww /2, renderer);
+	TextureManager::Instance()->drawTexture("jpg1", 0, 0, 400, 300, renderer);
+	TextureManager::Instance()->drawTexture("jpg2", 401, 0, 400, 300, renderer);
+	TextureManager::Instance()->drawTexture("jpg3", 0, 301, 400, 300, renderer);
+	TextureManager::Instance()->drawTexture("jpg4", 401, 301, 400, 300, renderer);
 
-	int angle = 0; // texture's rotation angle
-	switch (mouseDownIn) { //chek where Right mouse clicked
-	case jpg1: {angle = 350; } break;
-	case jpg2: {angle = 100; } break;
-	case jpg3: {angle = 5; } break;
-	case jpg4: {angle = 45; } break;
-	default: break;
-	}
+	//int angle = 0; // texture's rotation angle
+	//switch (mouseDownIn) { //chek where Right mouse clicked
+	//case jpg1: {angle = 350; } break;
+	//case jpg2: {angle = 100; } break;
+	//case jpg3: {angle = 5; } break;
+	//case jpg4: {angle = 45; } break;
+	//default: break;
+	//}
 
 	// let's use references to global variables to update this texture position
 	int& tPosX = texPosX;
