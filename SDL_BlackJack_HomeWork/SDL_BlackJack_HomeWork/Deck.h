@@ -1,5 +1,5 @@
 #pragma once
-
+#include <vector>
 struct Card {
 	const char* face;
 	const char* suit;
@@ -7,10 +7,14 @@ struct Card {
 
 class Deck {
 public:
-	Deck();
+	// kostruktor teste
+	Deck(int numberDeck);
+	// metod za razburkvane 
 	void shuffle();
-	void deal();
+	// metod za razdavane
+	Card dealtCard();
 
 private:
-	Card deck[52];
+	//karti v testeto
+	std::vector<Card> cards;
 };

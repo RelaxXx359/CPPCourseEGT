@@ -74,9 +74,9 @@ void Game::render() {
 	// animates the sprite sheet with the help of the update() function
 	TextureManager::Instance()->drawTexture("jpg", 0, 0, 1300, 500, renderer, SDL_FLIP_NONE);
 	TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 500, 16, 80, 115, 1, currentFrame, renderer, frameFlip);
-	TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 550, 16, 80, 115, 2, currentFrame, renderer, frameFlip);
+	/*TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 550, 16, 1050, 115, 2, currentFrame, renderer, frameFlip);
 	TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 600, 16, 80, 115, 3, currentFrame, renderer, frameFlip);
-	TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 650, 16, 80, 115, 4, currentFrame, renderer, frameFlip);
+	TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 650, 16, 80, 115, 4, currentFrame, renderer, frameFlip);*/
 
 
 
@@ -109,7 +109,7 @@ void Game::handleEvents() {
 	if (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_QUIT: running = false; break;
-		case SDL_KEYDOWN: {
+		/*case SDL_KEYDOWN: {
 			if (event.key.keysym.sym == SDLK_RIGHT) {
 				std::cout << "key right\n";
 				card = true;
@@ -128,7 +128,21 @@ void Game::handleEvents() {
 				if (event.key.keysym.sym == SDLK_LEFT) {
 					card = false;
 				}
-			}; break;
+			}; break;*/
+		case SDL_MOUSEBUTTONDOWN: {
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				std::cout << "button left\n";
+				card = true; 
+				//frameFlip = SDL_FLIP_NONE;
+			}
+
+		}; break;
+		case SDL_MOUSEBUTTONUP: {
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				card = false;
+			}
+		}; break;
+
 			default: break;
 			}
 		}
