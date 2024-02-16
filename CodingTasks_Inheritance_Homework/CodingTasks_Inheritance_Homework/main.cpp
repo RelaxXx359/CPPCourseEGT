@@ -4,8 +4,8 @@
 class Shape {
 public:   
 	 Shape(const std::string color) : color(color){}
-	~Shape();
-	void draw() const;
+	 ~Shape() {};
+	 void draw() const {};
 
 
 protected:
