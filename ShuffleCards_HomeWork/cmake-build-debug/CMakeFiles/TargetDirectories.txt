@@ -1,3 +1,0 @@
-C:/Users/Dobrolyub Velinov/CPPCourseEGT/ShuffleCards_HomeWork/cmake-build-debug/CMakeFiles/ShuffleCards_HomeWork.dir
-C:/Users/Dobrolyub Velinov/CPPCourseEGT/ShuffleCards_HomeWork/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Dobrolyub Velinov/CPPCourseEGT/ShuffleCards_HomeWork/cmake-build-debug/CMakeFiles/rebuild_cache.dir
