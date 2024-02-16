@@ -2,8 +2,9 @@
 #include <string>
 
 class Shape {
-public:
-	Shape(const std::string color) : color(color){}
+public:   
+	 Shape(const std::string color) : color(color){}
+	~Shape();
 	void draw() const;
 
 
@@ -16,7 +17,7 @@ public:
 	Circle(const std::string color ) : Shape(color){}
 	void draw() const {
 		std::cout << "Drawing a "<< color << " circle" << std::endl;
-	}
+	} 
 
 };
 class Rectangle :public Shape {
@@ -34,7 +35,7 @@ int main() {
 	Rectangle r1("blue");
 
 	c1.draw();
-	r1.draw();
+	r1.draw(); 
 
 	return 0;
 }
