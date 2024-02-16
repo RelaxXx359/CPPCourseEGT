@@ -2,11 +2,11 @@
 #include <string>
 class Book {
 public:
-	// конструктор за инициализиране на атрибути
+	// constructor  initialize attributes
 	Book(std::string title, std::string author, int pages) :
 		title(title), author(author), pages(pages) {}
 
-	// Функция за отпечатване
+	// function of print
 	void display() {
 		std::cout << "Title: " << title << std::endl;
 		std::cout << "Autor: " << author << std::endl;
@@ -14,16 +14,18 @@ public:
 	}
 
 private:
-	std::string title;   // Заглавие на книгата
-	std::string author;  // Автор на книгата
-	int pages; // Брой страници на книгата
+	// member varaible
+	std::string title;   
+	std::string author; 
+	int pages; 
 };
 
 
 int main() {
-
+	// class object
 	Book book1("Pod igoto", "Ivan Vazov", 58);
 
+	//print object
 	book1.display();
 
 
