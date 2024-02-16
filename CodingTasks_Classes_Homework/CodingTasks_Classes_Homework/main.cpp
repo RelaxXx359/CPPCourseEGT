@@ -26,6 +26,6 @@ int main() {
 
 	book1.display();
 
-	
+
 	return 0;
 }
