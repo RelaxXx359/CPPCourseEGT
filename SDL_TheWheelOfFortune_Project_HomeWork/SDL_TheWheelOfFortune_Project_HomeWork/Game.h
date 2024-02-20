@@ -15,10 +15,10 @@ public:
 	void handleEvents();
 	void clean();
 	bool isRunning();
-	void updateGame(bool toRun, int frames = 10, int speed = 100);
+	//void updateGame(bool toRun, int frames = 10, int speed = 1000);
 
 	// дали сме кликнали в разположението на текстурата
-	bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
+	//bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 private:
 	SDL_Window* window = NULL;
 	SDL_Renderer* renderer = NULL;
@@ -30,10 +30,13 @@ private:
 	SDL_Rect clickableRect;
 	int mouseDownX, mouseDownY; 
 
-
-	int currentFrame;
-	bool anim_state = false;
 	SDL_RendererFlip frameFlip = SDL_FLIP_NONE;
-	int SpriteX = 0, SpriteY = 0;
+	int currentFrame;
+
+
+	bool anim_state = false;
+	//int SpriteX = 0, SpriteY = 0;
+
+
 };
 

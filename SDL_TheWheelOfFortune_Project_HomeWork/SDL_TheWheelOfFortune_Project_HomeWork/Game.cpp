@@ -18,9 +18,17 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 				std::cout << "renderer creation success\n";
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-				// use the TextureManager to load textures
-				TextureManager::Instance()->loadTexture("assets/bmp2.bmp", "bmp", renderer);
-				TextureManager::Instance()->loadTexture("assets/wheel.png", "sprite_sheet", renderer);
+				// use the TextureManager to load textures:
+				// 
+				// wheel
+				TextureManager::Instance()->loadTexture("assets/wheel.png", "wheel", renderer);
+				// button "Spin"
+				TextureManager::Instance()->loadTexture("assets/spin.png", "spin", renderer);
+
+				//arrow
+				TextureManager::Instance()->loadTexture("assets/arrow.png", "arrow", renderer);
+
+	
 
 			}
 			else {
@@ -79,52 +87,39 @@ void Game::render() {
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // sets the window bg color needs to sit before SDL_RenderClear()
 	SDL_RenderClear(renderer);
 
-	//int ww, wh;
-	//SDL_GetWindowSize(window, &ww, &wh); // assigns the window's width and height to ww and wh
-	//SDL_Rect fillRect = {ww / 4, wh / 4, ww / 2, wh / 2};
-	//SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
-	//SDL_RenderFillRect(renderer, &fillRect);
-
-	//SDL_Rect outlineRect = { ww / 6, wh / 6, ww * 2 / 3, wh * 2 / 3 };
-	//SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0xFF);
-	//SDL_RenderDrawRect(renderer, &outlineRect);
-
-	//SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-	//SDL_RenderDrawLine(renderer, 0, wh / 2, ww, wh / 2);
-
-	//SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0x00, 0xFF); // renders dashed line
-	//for (int i = 0; i < wh; i += 4) {
-	//	SDL_RenderDrawPoint(renderer, ww / 2, i);
-	//}
-
-	//SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
-	//Shapes::drawCircle(renderer, ww / 4, wh / 4, wh / 4 );
-
-	
-	
-
-
-
 		// animates the sprite sheet with the help of the update() function
-		TextureManager::Instance()->drawOneFrameFromTexture("sprite_sheet", 0, 100, 770, 770, 1, currentFrame, renderer, frameFlip);
+
+
+	//SDL_RenderCopyEx(ren, textureMap[id], nullptr, &srcRect, angle, &center, SDL_FLIP_NONE);
+	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
+
+		TextureManager::Instance()->drawOneFrameFromTexture("wheel", 0, 100, 400, 400, 1, currentFrame, renderer, frameFlip);
+
+		// button "Spin"
+		TextureManager::Instance()->drawTexture("spin", 520, 50, 150, 70, renderer);
+		// arrow
+		TextureManager::Instance()->drawTexture("arrow", 400, 150, 100, 70, renderer);
+
+
 
 
 		int ww, wh;
 		SDL_GetWindowSize(window, &ww, &wh); // assigns the window's width and height to ww and wh
 
-		SDL_Rect outlineRect = { 720, 50, 150, 70 };
+		SDL_Rect outlineRect = { 520, 50, 150, 70 };
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 720 - 1, 50 - 1, 152, 72 };
+		outlineRect = { 520 - 1, 50 - 1, 152, 72 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 720 - 2, 50 - 2, 154, 74 };
+		outlineRect = { 520 - 2, 50 - 2, 154, 74 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 720 - 3, 50 - 3, 156, 76 };
+		outlineRect = { 520 - 3, 50 - 3, 156, 76 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
 
 		// NOTICE: the textures rendered later overlap the previosly rendered textures
 
-		SDL_RenderCopy(renderer, textTextureText, NULL, &dRectText);
+		//SDL_RenderCopy(renderer, textTextureText, NULL, &dRectText);
+
 
 		SDL_RenderPresent(renderer);
 }
@@ -135,28 +130,30 @@ void Game::handleEvents() {
 		switch (event.type) {
 		case SDL_QUIT: running = false; break;
 		case SDL_MOUSEBUTTONDOWN: {
-			//if (event.button.button == SDL_BUTTON_LEFT) {
-			//	std::cout << "button left\n";
-			//	anim_state = true;
-			//	//frameFlip = SDL_FLIP_NONE;
-			//}
+		
 			int msx , msy;
 			std::cout << "mouse button Down\n";
-
 			if (event.button.button == SDL_BUTTON_LEFT) {
-				SDL_GetMouseState(&msx, &msy);
+				//SDL_GetMouseState(&msx, &msy);
 				anim_state = true;
-				std::cout << msx << ":" << msy << std::endl;
+				//std::cout << msx << ":" << msy << std::endl;				
 			}
 		}; break;
 		case SDL_MOUSEBUTTONUP: {
 			std::cout << "mouse button UP\n";
-
 			if (event.button.button == SDL_BUTTON_LEFT) {
 				anim_state = false;
 			}
-	
 		}; break;
+
+
+	/*	case SDL_MOUSEMOTION:
+			int x = event.motion.x;
+			int y = event.motion.y;
+
+			if (x > mouseDownX.x && x< rect.x + rect.w && y>rect.y && rect.y < rect.y + rect.h) {
+				color = SDL_MapRGB(renderer->format, 0, 0, 0);
+			}*/
 		default: break;
 		}
 	}
@@ -165,20 +162,9 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-	//Logs the different stages of 'currentFrame' formula,
-	//if you have trouble understanding how it works try uncommenting the couts and study the output 
-	//std::cout << "SDL_TICKS           :" << SDL_GetTicks() << "\n";
-	//std::cout << "SDL_TICKS / 100     :" << int(SDL_GetTicks() / 100) << "\n";
-	//std::cout << "SDL_TICKS / 100 % 10:" << int(((SDL_GetTicks() / 100) % 10)) << "\n\n";
+	
 
-
-	if (anim_state) {
-		int numberOfFramesInSpriteSheet = 10;
-		int animationSpeed = 100; // lower is faster, min = 1
-		currentFrame = int(((SDL_GetTicks() / animationSpeed) % numberOfFramesInSpriteSheet));
-	}
 }
-
 
 
 void Game::clean() {

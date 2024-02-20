@@ -42,27 +42,24 @@ void TextureManager::drawOneFrameFromTexture(std::string id, // id of texture to
 	int currentRow, int currentFrame, //row starts from 1
 	SDL_Renderer* ren,
 	SDL_RendererFlip flip) { // flag to flip texture
-
+		
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
 	srcRect.x = width * currentFrame;
 	srcRect.y = height * (currentRow - 1);
-	srcRect.w = destRect.w = width;
-	srcRect.h = destRect.h = height;
+	srcRect.w = destRect.w = width ;
+	srcRect.h = destRect.h = height ;
 	destRect.x = x;
 	destRect.y = y;
 
 	SDL_Point center;
 	center.x = srcRect.w /2;
 	center.y = srcRect.h / 2;
-	int angle = 0;
+	static int angle = 0;
 	angle++; 
-	
-
-	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
-	
 	SDL_RenderCopyEx(ren, textureMap[id], nullptr, &srcRect, angle, &center, SDL_FLIP_NONE);
 
+	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
 TextureManager* TextureManager::instance = 0;

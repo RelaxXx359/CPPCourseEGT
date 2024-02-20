@@ -3,8 +3,8 @@
 #include <iostream>
 
 Game* game = NULL;
-const int WINDOW_WIDTH = 950;
-const int WINDOW_HEIGHT = 900;
+const int WINDOW_WIDTH = 700;
+const int WINDOW_HEIGHT = 500;
 
 int main(int argc, char* argv[]) {
 
