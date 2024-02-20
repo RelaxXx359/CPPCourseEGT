@@ -1,4 +1,4 @@
-#include "TextureManager.h"
+﻿#include "TextureManager.h"
 
 bool TextureManager::loadTexture(const char* fileName, std::string id, SDL_Renderer* ren) {
 
@@ -36,30 +36,47 @@ void TextureManager::drawTexture(std::string id,
 	SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void TextureManager::drawOneFrameFromTexture(std::string id, // id of texture to draw
-	int x, int y,	// window x,y to draw at;
-	int width, int height,  // width and height of texture
-	int currentRow, int currentFrame, //row starts from 1
-	SDL_Renderer* ren,
-	SDL_RendererFlip flip) { // flag to flip texture
-		
-	SDL_Rect srcRect;
-	SDL_Rect destRect;
-	srcRect.x = width * currentFrame;
-	srcRect.y = height * (currentRow - 1);
-	srcRect.w = destRect.w = width ;
-	srcRect.h = destRect.h = height ;
-	destRect.x = x;
-	destRect.y = y;
+//void TextureManager::drawOneFrameFromTexture(std::string id, // id of texture to draw
+//	int x, int y,	// window x,y to draw at;
+//	int width, int height,  // width and height of texture
+//	int currentRow, int currentFrame, //row starts from 1
+//	SDL_Renderer* ren,
+//	SDL_RendererFlip flip) { // flag to flip texture
+//
+//	SDL_Rect srcRect;
+//	SDL_Rect destRect;
+//	srcRect.x = width * currentFrame;
+//	srcRect.y = height * (currentRow - 1);
+//	srcRect.w = destRect.w = width;
+//	srcRect.h = destRect.h = height;
+//	destRect.x = x;
+//	destRect.y = y;
+//	SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
+//
+//}
 
-	SDL_Point center;
-	center.x = srcRect.w /2;
-	center.y = srcRect.h / 2;
-	static int angle = 0;
-	angle++; 
-	SDL_RenderCopyEx(ren, textureMap[id], nullptr, &srcRect, angle, &center, SDL_FLIP_NONE);
+	void TextureManager::drawRotation(std::string id, int x, int y, int width, int height, SDL_Renderer * ren, int rotationSpeed) {
 
-	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
+		static int angle = 0;
+		angle += rotationSpeed;
+
+		if (rotationSpeed < 0) {
+			rotationSpeed -= 10; // намаляване на скороста
+		}
+		SDL_Rect srcRect;
+		SDL_Rect destRect;
+		SDL_Point center;
+		center.x = width / 2;
+		center.y = height / 2;
+
+		srcRect.x = srcRect.y = 0;
+		srcRect.w = destRect.w = width;
+		srcRect.h = destRect.h = height;
+		destRect.x = x;
+		destRect.y = y;
+
+		SDL_RenderCopyEx(ren, textureMap[id], nullptr, &destRect, angle, &center, SDL_FLIP_NONE);
+
 }
 
 TextureManager* TextureManager::instance = 0;

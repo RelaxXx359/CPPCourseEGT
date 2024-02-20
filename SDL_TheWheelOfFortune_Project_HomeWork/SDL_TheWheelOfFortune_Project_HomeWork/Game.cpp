@@ -3,6 +3,8 @@
 #include <iostream>
 
 
+int speed = 1;
+
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags) {
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
@@ -19,16 +21,9 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
 				// use the TextureManager to load textures:
-				// 
-				// wheel
 				TextureManager::Instance()->loadTexture("assets/wheel.png", "wheel", renderer);
-				// button "Spin"
 				TextureManager::Instance()->loadTexture("assets/spin.png", "spin", renderer);
-
-				//arrow
-				TextureManager::Instance()->loadTexture("assets/arrow.png", "arrow", renderer);
-
-	
+				TextureManager::Instance()->loadTexture("assets/arrow2.png", "arrow", renderer);
 
 			}
 			else {
@@ -93,12 +88,13 @@ void Game::render() {
 	//SDL_RenderCopyEx(ren, textureMap[id], nullptr, &srcRect, angle, &center, SDL_FLIP_NONE);
 	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
 
-		TextureManager::Instance()->drawOneFrameFromTexture("wheel", 0, 100, 400, 400, 1, currentFrame, renderer, frameFlip);
+		TextureManager::Instance()->drawRotation("wheel", 0, 100, 800, 800, renderer, frameFlip);
+		//std::string id, int x, int y, int width, int height, SDL_Renderer* ren, int rotationSpeed
 
 		// button "Spin"
-		TextureManager::Instance()->drawTexture("spin", 520, 50, 150, 70, renderer);
+		TextureManager::Instance()->drawTexture("spin", 620, 50, 150, 70, renderer);
 		// arrow
-		TextureManager::Instance()->drawTexture("arrow", 400, 150, 100, 70, renderer);
+		TextureManager::Instance()->drawTexture("arrow", 350, 20, 100, 70, renderer);
 
 
 
@@ -106,14 +102,14 @@ void Game::render() {
 		int ww, wh;
 		SDL_GetWindowSize(window, &ww, &wh); // assigns the window's width and height to ww and wh
 
-		SDL_Rect outlineRect = { 520, 50, 150, 70 };
+		SDL_Rect outlineRect = { 620, 50, 150, 70 };
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 520 - 1, 50 - 1, 152, 72 };
+		outlineRect = { 620 - 1, 50 - 1, 152, 72 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 520 - 2, 50 - 2, 154, 74 };
+		outlineRect = { 620 - 2, 50 - 2, 154, 74 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
-		outlineRect = { 520 - 3, 50 - 3, 156, 76 };
+		outlineRect = { 620 - 3, 50 - 3, 156, 76 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
 
 		// NOTICE: the textures rendered later overlap the previosly rendered textures
@@ -127,33 +123,37 @@ void Game::render() {
 void Game::handleEvents() {
 	SDL_Event event;
 	if (SDL_PollEvent(&event)) {
+		int msx, msy;
+
 		switch (event.type) {
 		case SDL_QUIT: running = false; break;
 		case SDL_MOUSEBUTTONDOWN: {
-		
-			int msx , msy;
-			std::cout << "mouse button Down\n";
+
 			if (event.button.button == SDL_BUTTON_LEFT) {
-				//SDL_GetMouseState(&msx, &msy);
+				SDL_GetMouseState(&msx, &msy);
+			
+				Game::mouseDownX = msx;
+				Game::mouseDownY = msy;
+				std::cout << "Left mouse button is down\n";
 				anim_state = true;
-				//std::cout << msx << ":" << msy << std::endl;				
+				frameFlip = SDL_FLIP_HORIZONTAL;
+			}
+			if (event.button.button == SDL_BUTTON_RIGHT) {
+				std::cout << "Right mouse button is down\n";
 			}
 		}; break;
 		case SDL_MOUSEBUTTONUP: {
-			std::cout << "mouse button UP\n";
 			if (event.button.button == SDL_BUTTON_LEFT) {
+				SDL_GetMouseState(&msx, &msy);
+				Game::isClickableButton(mouseDownX, mouseDownY, msx, msy);
+				std::cout << "Left mouse button is up\n";
 				anim_state = false;
 			}
-		}; break;
+			if (event.button.button == SDL_BUTTON_RIGHT) {
+				std::cout << "Right mouse button is up\n";
 
-
-	/*	case SDL_MOUSEMOTION:
-			int x = event.motion.x;
-			int y = event.motion.y;
-
-			if (x > mouseDownX.x && x< rect.x + rect.w && y>rect.y && rect.y < rect.y + rect.h) {
-				color = SDL_MapRGB(renderer->format, 0, 0, 0);
-			}*/
+			}
+		}
 		default: break;
 		}
 	}
@@ -162,29 +162,42 @@ void Game::handleEvents() {
 
 void Game::update() {
 
-	
 
 }
-
-
 void Game::clean() {
 	std::cout << "cleaning game\n";
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	SDL_Quit();
 }
-
 bool Game::isRunning() {
 	return Game::running;
 }
-
 Game::Game() {
 	Game::window = NULL;
 	Game::renderer = NULL;
 	Game::running = true;
-	Game::currentFrame = 0;
 }
-
 Game::~Game() {
 
+}
+bool Game::isClickableButton(int xDown, int yDown, int xUp, int yUp) {
+	int ww, wh;
+	SDL_GetWindowSize(window, &ww, &wh); // get window size
+
+	// button coordinates
+	int spinButtonX = 520;
+	int spinButtonY = wh /2;
+	// size button
+	int spinButtonW = 150;
+	int spinButtonH = 70;
+
+
+	if ((xDown > spinButtonX && xDown < (spinButtonX + spinButtonW)) && (xUp > spinButtonX && xUp < (spinButtonX + spinButtonW)) &&
+		(yDown > spinButtonY&& yDown < (spinButtonX + spinButtonH)) && (yUp > spinButtonY && yUp < (spinButtonY + spinButtonH))){
+		std::cout << "Spin button" << std::endl;
+
+			return true; // бутона е бил кликнат
+		}
+	return false;
 }

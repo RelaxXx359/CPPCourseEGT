@@ -7,18 +7,9 @@
 class TextureManager {
 public:
 	bool loadTexture(const char* fileName, std::string id, SDL_Renderer* ren);
-	void drawTexture(std::string id,
-		int x, int y,
-		int width, int height,
-		SDL_Renderer* ren,
-		SDL_RendererFlip flip = SDL_FLIP_NONE);
-	void drawOneFrameFromTexture(std::string id,
-		int x, int y,
-		int width, int height,
-		int currentRow, int currentFrame,
-		SDL_Renderer* ren,
-		SDL_RendererFlip flip = SDL_FLIP_NONE);
-		
+
+	void drawTexture(std::string id,int x, int y,int width, int height,SDL_Renderer* ren,SDL_RendererFlip flip = SDL_FLIP_NONE);
+
 	static TextureManager* Instance() { // TextureManager is a singleton, only one instance allowed
 		if (instance == 0) {
 			instance = new TextureManager();
@@ -26,6 +17,7 @@ public:
 		}
 		return instance;
 	}
+	void drawRotation(std::string id, int x, int y, int width, int height, SDL_Renderer* ren, int rotationSpeed);
 
 private:
 	std::map<std::string, SDL_Texture*> textureMap;
