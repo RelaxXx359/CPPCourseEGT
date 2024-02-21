@@ -3,7 +3,6 @@
 #include <iostream>
 
 
-int speed = 1;
 
 bool Game::init(const char* title, int xpos, int ypos, int width, int height, int flags) {
 
@@ -11,16 +10,16 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 		std::cout << "SDL init success\n";
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-		if (window != 0) //window init success
+		if (window != 0) //прозорец инициализиране 
 		{
 			std::cout << "window creation success\n";
 			renderer = SDL_CreateRenderer(window, -1, 0);
-			if (renderer != 0) //renderer init success
+			if (renderer != 0) //рендеринг инициализиране
 			{
 				std::cout << "renderer creation success\n";
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
-				// use the TextureManager to load textures:
+				// използвайте TextureManager за зареждане на текстури:
 				TextureManager::Instance()->loadTexture("assets/wheel.png", "wheel", renderer);
 				TextureManager::Instance()->loadTexture("assets/spin.png", "spin", renderer);
 				TextureManager::Instance()->loadTexture("assets/arrow2.png", "arrow", renderer);
@@ -79,29 +78,19 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 
 void Game::render() {
 
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // sets the window bg color needs to sit before SDL_RenderClear()
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // задава цвета на прозореца
 	SDL_RenderClear(renderer);
 
-		// animates the sprite sheet with the help of the update() function
-
-
-	//SDL_RenderCopyEx(ren, textureMap[id], nullptr, &srcRect, angle, &center, SDL_FLIP_NONE);
-	//SDL_RenderCopyEx(ren, textureMap[id], &srcRect, &destRect, 0, 0, flip);
-
-		TextureManager::Instance()->drawRotation("wheel", 0, 100, 800, 800, renderer, frameFlip);
-		//std::string id, int x, int y, int width, int height, SDL_Renderer* ren, int rotationSpeed
-
+		TextureManager::Instance()->drawRotation("wheel", 0, 100, 800, 800, renderer, rotationSpeed);
 		// button "Spin"
 		TextureManager::Instance()->drawTexture("spin", 620, 50, 150, 70, renderer);
 		// arrow
 		TextureManager::Instance()->drawTexture("arrow", 350, 20, 100, 70, renderer);
 
-
-
-
 		int ww, wh;
-		SDL_GetWindowSize(window, &ww, &wh); // assigns the window's width and height to ww and wh
+		SDL_GetWindowSize(window, &ww, &wh); // присвоява ширината и височината на прозореца на ww и wh
 
+		//удебелен правоъгълник около бутона
 		SDL_Rect outlineRect = { 620, 50, 150, 70 };
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 		SDL_RenderDrawRect(renderer, &outlineRect);
@@ -112,9 +101,7 @@ void Game::render() {
 		outlineRect = { 620 - 3, 50 - 3, 156, 76 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
 
-		// NOTICE: the textures rendered later overlap the previosly rendered textures
 
-		//SDL_RenderCopy(renderer, textTextureText, NULL, &dRectText);
 
 
 		SDL_RenderPresent(renderer);
@@ -122,48 +109,45 @@ void Game::render() {
 
 void Game::handleEvents() {
 	SDL_Event event;
-	if (SDL_PollEvent(&event)) {
+	if (SDL_PollEvent(&event)) { // проверява за събитие
 		int msx, msy;
 
-		switch (event.type) {
-		case SDL_QUIT: running = false; break;
-		case SDL_MOUSEBUTTONDOWN: {
-
+		switch (event.type) {  //вид на събитието
+		case SDL_QUIT: running = false; break; //затваряне на прозореца
+		case SDL_MOUSEBUTTONDOWN: {   //натискане на бутон на мишката
 			if (event.button.button == SDL_BUTTON_LEFT) {
 				SDL_GetMouseState(&msx, &msy);
-			
-				Game::mouseDownX = msx;
-				Game::mouseDownY = msy;
 				std::cout << "Left mouse button is down\n";
-				anim_state = true;
-				frameFlip = SDL_FLIP_HORIZONTAL;
+				spinning = true;
 			}
 			if (event.button.button == SDL_BUTTON_RIGHT) {
 				std::cout << "Right mouse button is down\n";
 			}
 		}; break;
-		case SDL_MOUSEBUTTONUP: {
-			if (event.button.button == SDL_BUTTON_LEFT) {
-				SDL_GetMouseState(&msx, &msy);
-				Game::isClickableButton(mouseDownX, mouseDownY, msx, msy);
-				std::cout << "Left mouse button is up\n";
-				anim_state = false;
-			}
-			if (event.button.button == SDL_BUTTON_RIGHT) {
-				std::cout << "Right mouse button is up\n";
 
-			}
-		}
 		default: break;
 		}
 	}
 }
 
-
 void Game::update() {
+	if (spinning) {
+		rotationSpeed = 10;
+		if (SDL_GetTicks() % 30 == 0) {
+			rotationSpeed -= 1;
+			std::cout << "rotaionspeed -= 2\n";
+		}
+		if (rotationSpeed <= 0) {
+			rotationSpeed = 0;
+			std::cout << "rotaionspeed = 0\n";
 
-
+		}
+	}
+	
 }
+
+
+
 void Game::clean() {
 	std::cout << "cleaning game\n";
 	SDL_DestroyWindow(window);
@@ -171,7 +155,7 @@ void Game::clean() {
 	SDL_Quit();
 }
 bool Game::isRunning() {
-	return Game::running;
+	return running;
 }
 Game::Game() {
 	Game::window = NULL;
@@ -183,12 +167,12 @@ Game::~Game() {
 }
 bool Game::isClickableButton(int xDown, int yDown, int xUp, int yUp) {
 	int ww, wh;
-	SDL_GetWindowSize(window, &ww, &wh); // get window size
+	SDL_GetWindowSize(window, &ww, &wh); //вземете размера на прозореца
 
-	// button coordinates
+	// координати на бутона
 	int spinButtonX = 520;
 	int spinButtonY = wh /2;
-	// size button
+	// размер на бутон "Spin"
 	int spinButtonW = 150;
 	int spinButtonH = 70;
 
@@ -196,8 +180,30 @@ bool Game::isClickableButton(int xDown, int yDown, int xUp, int yUp) {
 	if ((xDown > spinButtonX && xDown < (spinButtonX + spinButtonW)) && (xUp > spinButtonX && xUp < (spinButtonX + spinButtonW)) &&
 		(yDown > spinButtonY&& yDown < (spinButtonX + spinButtonH)) && (yUp > spinButtonY && yUp < (spinButtonY + spinButtonH))){
 		std::cout << "Spin button" << std::endl;
-
-			return true; // бутона е бил кликнат
+			return true; // button clicked
 		}
 	return false;
 }
+//int Game::getCurrentSector() const {
+//
+//	//  броя на секторите
+//	int numSectors = sectors.size();
+//
+//	// Изчисляваме ъгъла на всяка секторна част, като разделяме 360 градуса на броя сектори.
+//	float sectorAngle = 360.0f / numSectors;
+//
+//	// Изчисляваме текущия ъгъл на завъртане, като вземаме остатъка при деление на rotationAngle на 360.
+//	float currentAngle = rotationAngle % 360;
+//
+//	// Ако текущият ъгъл е отрицателен, преобразуваме го в положителен.
+//	if (currentAngle < 0) {
+//		currentAngle += 360; // за отрицателни ъгли
+//	}
+//
+//	// Изчисляваме индекса на сектора, към който принадлежи текущия ъгъл.
+//
+//	int sectorIndex = static_cast<int>(currentAngle / sectorAngle);
+//	return sectorIndex;
+//}
+
+

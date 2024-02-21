@@ -4,6 +4,7 @@
 #include <SDL_image.h>
 #include "TextureManager.h"
 #include "SDL_ttf.h"
+#include <vector>
 class Game {
 public:
 	Game();
@@ -24,6 +25,10 @@ public:
 	//bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 
 	bool isClickableButton(int xDown, int yDown, int xUp, int yUp);
+	int getCurrentSector() const;
+
+	//std::vector<std::string> sectors;
+
 
 private:
 
@@ -35,15 +40,17 @@ private:
 	SDL_Rect dRectText;
 
 	SDL_Rect clickableRect;*/
-	int mouseDownX, mouseDownY; 
+	//int mouseDownX, mouseDownY; 
 
-	SDL_RendererFlip frameFlip = SDL_FLIP_NONE;
+	//SDL_RendererFlip frameFlip = SDL_FLIP_NONE;
 	//int currentFrame;
 
 
+	//int SpriteX = 0, SpriteY = 0;
+	bool spinning = false; // Флаг, показващ дали колелото се върти
+	int rotationAngle; // Текущ ъгъл на въртене на колелото
+	float rotationSpeed; // Скорост на въртене на колелото
 	bool anim_state = false;
-	int SpriteX = 0, SpriteY = 0;
-
 
 
 

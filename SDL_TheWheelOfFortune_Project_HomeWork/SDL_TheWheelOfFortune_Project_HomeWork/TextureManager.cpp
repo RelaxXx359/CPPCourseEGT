@@ -57,12 +57,10 @@ void TextureManager::drawTexture(std::string id,
 
 	void TextureManager::drawRotation(std::string id, int x, int y, int width, int height, SDL_Renderer * ren, int rotationSpeed) {
 
-		static int angle = 0;
+		static float angle = 0;
 		angle += rotationSpeed;
 
-		if (rotationSpeed < 0) {
-			rotationSpeed -= 10; // намаляване на скороста
-		}
+		
 		SDL_Rect srcRect;
 		SDL_Rect destRect;
 		SDL_Point center;

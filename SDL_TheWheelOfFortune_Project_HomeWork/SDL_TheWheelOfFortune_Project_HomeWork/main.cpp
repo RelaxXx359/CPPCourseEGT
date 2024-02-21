@@ -6,6 +6,7 @@ Game* game = NULL;
 const int WINDOW_WIDTH = 900;
 const int WINDOW_HEIGHT = 900;
 
+
 int main(int argc, char* argv[]) {
 
 	game = new Game();
@@ -15,10 +16,30 @@ int main(int argc, char* argv[]) {
 		WINDOW_WIDTH, WINDOW_HEIGHT,
 		SDL_WINDOW_RESIZABLE);
 	//game->ttf_init();
+
+
+
+
+	const int FPS = 30;
+	const int frameDelay = 1000 / FPS;
+	Uint32 frameStart;
+	int frameTime;
+
+
+
 	while (game->isRunning()) {
+		frameStart = SDL_GetTicks();
+
 		game->handleEvents();
 		game->update();
 		game->render();
+
+		frameTime = SDL_GetTicks() - frameStart;
+
+		if (frameDelay > frameTime) {
+			SDL_Delay(frameDelay - frameTime);
+	}
+
 	}
 	game->clean();
 	return 0;
