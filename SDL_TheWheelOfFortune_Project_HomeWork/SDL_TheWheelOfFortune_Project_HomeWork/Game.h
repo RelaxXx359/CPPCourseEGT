@@ -1,5 +1,6 @@
 ﻿//Game.h
 #pragma once
+#include <iostream>
 #include <SDL.h>
 #include <SDL_image.h>
 #include "TextureManager.h"
@@ -23,7 +24,6 @@ public:
 	void handleEvents();
 	void clean();
 	bool isRunning();
-	//void updateGame(bool toRun, int frames = 10, int speed = 1000);
 
 	// дали сме кликнали в разположението на текстурата
 	//bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
@@ -31,7 +31,7 @@ public:
 	bool isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 	int getCurrentSector() const;
 
-
+	//void winScreen(std::string, int);
 
 private:
 
@@ -48,6 +48,7 @@ private:
 
 	//int SpriteX = 0, SpriteY = 0;
 	bool spinning = false; // Флаг, показващ дали колелото се върти
+	bool win = false;
 	int rotationAngle; // Текущ ъгъл на въртене на колелото
 	//float rotationSpeed; // Скорост на въртене на колелото
 	float rotationSpeed = 10;
@@ -56,5 +57,7 @@ private:
 	SDL_Texture* clickableTexture;
 	SDL_Rect clickableRect;
 	int mouseDownX, mouseDownY;
+
+
 };
 

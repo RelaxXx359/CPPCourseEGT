@@ -43,43 +43,50 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 	running = true;
 	return true;
 }
-//bool Game::ttf_init() {
-//	if (TTF_Init() == -1) {
-//		return false;
-//	}
-//	TTF_Font* font1 = TTF_OpenFont("fonts/Arcade.ttf.ttf", 48);
-//	if (font1 == NULL) {
-//		return false;
-//	}
-//
-//	SDL_Surface* tempSurfaceText = NULL;
-//	tempSurfaceText = TTF_RenderText_Blended(font1, "Spin", { 0,0,255,255 });
-//	textTextureText = SDL_CreateTextureFromSurface(renderer, tempSurfaceText);
-//
-//	int tw, th;
-//	SDL_QueryTexture(textTextureText, 0, 0, &tw, &th);
-//	dRectText = { 10,10,tw,th };
-//
-//	SDL_FreeSurface(tempSurfaceText);
-//	TTF_CloseFont(font1);
-//	return true;
-//}
+bool Game::ttf_init() {
+	if (TTF_Init() == -1) { // проверка дали инициализацията е успешна
+		std::cout << "TTF_Init is false\n";
+		return false;
+	}
 
-//bool Game::isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp) {
-//	int tw, th;
-//	SDL_QueryTexture(t, 0, 0, &tw, &th);
-//
-//	if ((xDown > r->x && xDown < (r->x + tw)) && (xUp > r->x && xUp < (r->x + tw)) &&
-//		(yDown > r->y && yDown < (r->y + th)) && (yUp > r->y && yUp < (r->y + th))) {
-//		return true;
-//	}
-//	return false;
-//}
+	TTF_Font* font = TTF_OpenFont("fonts/comic.ttf", 26); // отваря шрифт от файл с име и размер, връща указател към заредения шрифт
+	if (font == NULL) { // проверка дали зареждането на шрифта е успешно
+		std::cout << "Font is false\n";
+		return false;
+	}
+
+	if (win){
+		std::cout << "spinning is false\n";
+
+		SDL_Surface* tempSurfaceText = NULL; // указател за съхранение на текста
+		tempSurfaceText = TTF_RenderText_Blended(font, "You win: ", { 0, 0, 255, 255 }); //за да се рендира текста
+		textTextureFont = SDL_CreateTextureFromSurface(renderer, tempSurfaceText); //създаване на текстура
+
+
+		int tw, th; // променливи за съхранение на ширина и височина
+
+		SDL_QueryTexture(textTextureFont, 0, 0, &tw, &th); //извличане  ширина и височина
+		dRectFont = { 20, 20, tw,th };  // структора с парамеетри
+		std::cout << "dRect " << tw << ":" << th << std::endl;
+
+
+		SDL_FreeSurface(tempSurfaceText); //освобождава паметта
+		TTF_CloseFont(font); //затваря текста
+		return true; // Връщаме true, за да покажем, че инициализацията е успешна
+
+	}
+	return false; // Връщаме false, ако spinning не е false
+}
+
+
 
 void Game::render() {
 
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // задава цвета на прозореца
 	SDL_RenderClear(renderer);
+
+
+	SDL_RenderCopy(renderer, textTextureFont, NULL, &dRectFont);
 
 		TextureManager::Instance()->drawRotation("wheel", 0, 100, 800, 800, renderer, rotationSpeed);
 		// button "Spin"
@@ -118,7 +125,6 @@ void Game::handleEvents() {
 				mouseDownX = msx;
 				mouseDownY = msy;
 				std::cout << "Left mouse button is down\n";
-				//std::cout << (isClickableButton(clickableTexture, &clickableRect, mouseDownX, mouseDownY, msx, msy) ? "CLICKED\n" : "NOT CLICKED\n");
 				bool isButtonClicked = isClickableButton(clickableTexture, &clickableRect, mouseDownX, mouseDownY, msx, msy);
 				if (isButtonClicked) {  //ако бутона е натиснат, колелото се завърта
 					std::cout << "CLICKED SPIN\n";
@@ -151,19 +157,25 @@ void Game::handleEvents() {
 	}
 }
 
-void Game::update() {
-	//if (spinning) {
-		//rotationSpeed = 10;
+
+
+void Game::update() {	
 		if (SDL_GetTicks() % 30 == 0) {
 			rotationSpeed -= 1;
 			std::cout << "rotaionspeed -= 2\n";
 		}
 		if (rotationSpeed <= 0) {
 			rotationSpeed = 0;
-			std::cout << "rotaionspeed = 0\n";
+			bool getPrice = getCurrentSector();
+			std::cout << "sector index: " << getPrice << std::endl;
+			spinning = false;
+			ttf_init();
+			win = true;
+			// покажи "You win" и спечелената сума на екрана
+			//winScreen("You win", winnings);
 		}
 	}
-	
+
 
 
 void Game::clean() {
@@ -221,7 +233,6 @@ int Game::getCurrentSector() const {
 
 	// изчисляваме текущия ъгъл на завъртане, като вземаме остатъка при деление на rotationAngle на 360.
 	float currentAngle = rotationAngle % 360;
-
 	// Изчисляване на текущия ъгъл на завъртане
 	//float currentAngle = fmod(rotationAngle, 360.0f);
 
@@ -236,29 +247,20 @@ int Game::getCurrentSector() const {
 	return sectorIndex;
 }
 
-bool Game::ttf_init() {
-	if (TTF_Init() == -1) { // проверка дали инициализацията е успешна
-		return false;
-	}
 
-	TTF_Font* font = TTF_OpenFont("fonts/comic.ttf", 48); // отваря шрифт от файл с име и размер, връща указател към заредения шрифт
-	if (font == NULL) { // проверка дали зареждането на шрифта е успешно
-		return false;
-	}
 
-	SDL_Surface* tempSurfaceText = NULL; // указател за съхранение на текста
-	tempSurfaceText = TTF_RenderText_Blended(font, "Hello Word!", { 0, 0, 255, 255 }); //за да се рендира текста
+//void Game::winScreen(std::string massage, int winnings) {
+//	int xPos = 0;
+//	int yPos = 0; 
+//	// Изобразете съобщението за печалба
+//	ttf_init(massage, xPos, yPos);
+//
+//	// Изобразете спечелената сума
+//	std::string winningsText = "Winnings: " + std::to_string(winnings);
+//	ttf_init(winningsText, xPos, xPos + 50);
+//
+//}
 
-	textTextureFont = SDL_CreateTextureFromSurface(renderer, tempSurfaceText); //създаване на текстура
 
-	int tw, th; // променливи за съхранение на ширина и височина
-
-	SDL_QueryTexture(textTextureFont, 0, 0, &tw, &th); //извличане  ширина и височина
-	dRectFont = { 10, 10, tw,th };  // структора с парамеетри
-
-	SDL_FreeSurface(tempSurfaceText); //освобождава паметта
-	TTF_CloseFont(font); //затваря текста
-	return true;
-}
 
 

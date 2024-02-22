@@ -1,4 +1,4 @@
-//main.cpp
+﻿//main.cpp
 #include "Game.h"
 #include <iostream>
 
@@ -15,10 +15,8 @@ int main(int argc, char* argv[]) {
 		SDL_WINDOWPOS_CENTERED,
 		WINDOW_WIDTH, WINDOW_HEIGHT,
 		SDL_WINDOW_RESIZABLE);
-	//game->ttf_init();
-
-
-
+	//функция за зареждане на текста
+	game->ttf_init();
 
 	const int FPS = 30;
 	const int frameDelay = 1000 / FPS;
