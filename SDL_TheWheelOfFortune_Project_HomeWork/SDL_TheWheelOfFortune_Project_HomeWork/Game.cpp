@@ -23,6 +23,8 @@ bool Game::init(const char* title, int xpos, int ypos, int width, int height, in
 				TextureManager::Instance()->loadTexture("assets/wheel.png", "wheel", renderer);
 				TextureManager::Instance()->loadTexture("assets/spin.png", "spin", renderer);
 				TextureManager::Instance()->loadTexture("assets/arrow2.png", "arrow", renderer);
+				TextureManager::Instance()->loadTexture("assets/Confetti.png", "confetti", renderer);
+
 
 			}
 			else {
@@ -56,8 +58,6 @@ bool Game::ttf_init() {
 	}
 
 	if (win){
-		std::cout << "spinning is false\n";
-
 		SDL_Surface* tempSurfaceText = NULL; // указател за съхранение на текста
 		tempSurfaceText = TTF_RenderText_Blended(font, "You win: ", { 0, 0, 255, 255 }); //за да се рендира текста
 		textTextureFont = SDL_CreateTextureFromSurface(renderer, tempSurfaceText); //създаване на текстура
@@ -67,7 +67,6 @@ bool Game::ttf_init() {
 
 		SDL_QueryTexture(textTextureFont, 0, 0, &tw, &th); //извличане  ширина и височина
 		dRectFont = { 20, 20, tw,th };  // структора с парамеетри
-		std::cout << "dRect " << tw << ":" << th << std::endl;
 
 
 		SDL_FreeSurface(tempSurfaceText); //освобождава паметта
@@ -120,7 +119,9 @@ void Game::handleEvents() {
 		case SDL_QUIT: running = false; break; //затваряне на прозореца
 
 		case SDL_MOUSEBUTTONDOWN: {   //натискане на бутон на мишката
+
 			if (event.button.button == SDL_BUTTON_LEFT) {
+
 				SDL_GetMouseState(&msx, &msy);
 				mouseDownX = msx;
 				mouseDownY = msy;
@@ -131,6 +132,7 @@ void Game::handleEvents() {
 					spinning = true;
 				}
 				else {
+					spinning = false;
 					std::cout << "NOT CLICKED SPIN\n";  // не е натиснат бутона
 				}
 
@@ -160,21 +162,28 @@ void Game::handleEvents() {
 
 
 void Game::update() {	
-		if (SDL_GetTicks() % 30 == 0) {
-			rotationSpeed -= 1;
-			std::cout << "rotaionspeed -= 2\n";
+	
+		if (SDL_GetTicks() % 40 == 0) {
+			rotationSpeed -= 4;
 		}
+	
 		if (rotationSpeed <= 0) {
 			rotationSpeed = 0;
-			bool getPrice = getCurrentSector();
-			std::cout << "sector index: " << getPrice << std::endl;
+			
+
 			spinning = false;
 			ttf_init();
 			win = true;
+			//int getPrice = getCurrentSector();
+			//std::cout << "sector index: " << getPrice << std::endl;
+			//winScreen("You win", winning);
 			// покажи "You win" и спечелената сума на екрана
-			//winScreen("You win", winnings);
+			std::cout << getCircleCoordinates << std::endl;
 		}
 	}
+		
+	
+
 
 
 
@@ -250,17 +259,37 @@ int Game::getCurrentSector() const {
 
 
 //void Game::winScreen(std::string massage, int winnings) {
-//	int xPos = 0;
-//	int yPos = 0; 
+//	
 //	// Изобразете съобщението за печалба
-//	ttf_init(massage, xPos, yPos);
+//	renderText(massage, winnings);
 //
 //	// Изобразете спечелената сума
 //	std::string winningsText = "Winnings: " + std::to_string(winnings);
-//	ttf_init(winningsText, xPos, xPos + 50);
+//	renderText(winningsText, xPos, xPos + 50);
 //
 //}
 
+
+void Game::getCircleCoordinates(int centerX, int centerY, int sideLength, SDL_Point* points) {
+
+	SDL_Point points[24]; // Масив за съхранение на координатите на върховете
+
+	const double angleIncrement = 2 * M_PI / 24; // Ъгълът между върховете на окръжността
+
+	for (size_t i = 0; i < 24; ++i)
+	{
+		// Изчисляване на координатите на върховете на петоъгълника
+		points[i].x = centerX + sideLength * cos(i * angleIncrement);
+		points[i].y = centerY + sideLength * sin(i * angleIncrement);
+	}
+
+	getCircleCoordinates(centerX, centerY, sideLength, points);
+
+	// Сега points съдържа координатите на върховете на окръжността
+	for (int i = 0; i < 24; ++i) {
+		std::cout << "Point " << i << ": (" << points[i].x << ", " << points[i].y << ")" << std::endl;
+	}
+}
 
 
 

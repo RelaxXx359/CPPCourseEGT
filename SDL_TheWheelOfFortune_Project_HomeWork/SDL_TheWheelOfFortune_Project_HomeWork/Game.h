@@ -33,6 +33,9 @@ public:
 
 	//void winScreen(std::string, int);
 
+
+	 void getCircleCoordinates(int centerX, int centerY, int sideLength, SDL_Point* points);
+
 private:
 
 	SDL_Window* window = NULL;
@@ -42,11 +45,11 @@ private:
 	SDL_Texture* textTextureFont;
 	SDL_Rect dRectFont; 
 
-	//SDL_RendererFlip frameFlip = SDL_FLIP_NONE;
-	//int currentFrame;
+	SDL_RendererFlip frameFlip = SDL_FLIP_NONE;
+	int currentFrame;
 
 
-	//int SpriteX = 0, SpriteY = 0;
+	int CenterX, CenterY ;
 	bool spinning = false; // Флаг, показващ дали колелото се върти
 	bool win = false;
 	int rotationAngle; // Текущ ъгъл на въртене на колелото
