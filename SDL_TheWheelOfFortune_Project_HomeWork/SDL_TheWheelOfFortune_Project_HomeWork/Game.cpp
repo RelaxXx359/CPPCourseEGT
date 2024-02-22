@@ -101,9 +101,6 @@ void Game::render() {
 		outlineRect = { 620 - 3, 50 - 3, 156, 76 };
 		SDL_RenderDrawRect(renderer, &outlineRect);
 
-
-
-
 		SDL_RenderPresent(renderer);
 }
 
@@ -114,15 +111,39 @@ void Game::handleEvents() {
 
 		switch (event.type) {  //вид на събитието
 		case SDL_QUIT: running = false; break; //затваряне на прозореца
+
 		case SDL_MOUSEBUTTONDOWN: {   //натискане на бутон на мишката
 			if (event.button.button == SDL_BUTTON_LEFT) {
 				SDL_GetMouseState(&msx, &msy);
+				mouseDownX = msx;
+				mouseDownY = msy;
 				std::cout << "Left mouse button is down\n";
-				spinning = true;
+				//std::cout << (isClickableButton(clickableTexture, &clickableRect, mouseDownX, mouseDownY, msx, msy) ? "CLICKED\n" : "NOT CLICKED\n");
+				bool isButtonClicked = isClickableButton(clickableTexture, &clickableRect, mouseDownX, mouseDownY, msx, msy);
+				if (isButtonClicked) {  //ако бутона е натиснат, колелото се завърта
+					std::cout << "CLICKED SPIN\n";
+					spinning = true;
+				}
+				else {
+					std::cout << "NOT CLICKED SPIN\n";  // не е натиснат бутона
+				}
+
+				std::cout <<"mouseDownX " << mouseDownX << " : " <<"mouseDownY " << mouseDownY << std::endl;
+				std::cout <<"msx " << msx << "  :" << "msy " << msy << std::endl;
 			}
 			if (event.button.button == SDL_BUTTON_RIGHT) {
 				std::cout << "Right mouse button is down\n";
 			}
+		/*case SDL_MOUSEBUTTONUP: {
+			if (event.button.button == SDL_BUTTON_LEFT) {
+				SDL_GetMouseState(&msx, &msy);
+				std::cout << "Left mouse button is up\n";
+			}
+			if (event.button.button == SDL_BUTTON_RIGHT) {
+				std::cout << "Right mouse button is up\n";
+
+			}
+		}*/
 		}; break;
 
 		default: break;
@@ -131,8 +152,8 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	if (spinning) {
-		rotationSpeed = 10;
+	//if (spinning) {
+		//rotationSpeed = 10;
 		if (SDL_GetTicks() % 30 == 0) {
 			rotationSpeed -= 1;
 			std::cout << "rotaionspeed -= 2\n";
@@ -140,12 +161,9 @@ void Game::update() {
 		if (rotationSpeed <= 0) {
 			rotationSpeed = 0;
 			std::cout << "rotaionspeed = 0\n";
-
 		}
 	}
 	
-}
-
 
 
 void Game::clean() {
@@ -165,45 +183,82 @@ Game::Game() {
 Game::~Game() {
 
 }
-bool Game::isClickableButton(int xDown, int yDown, int xUp, int yUp) {
+bool Game::isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp) {
 	int ww, wh;
 	SDL_GetWindowSize(window, &ww, &wh); //вземете размера на прозореца
 
 	// координати на бутона
-	int spinButtonX = 520;
-	int spinButtonY = wh /2;
+	int spinButtonX = 620;
+	int spinButtonY = 50;
 	// размер на бутон "Spin"
 	int spinButtonW = 150;
 	int spinButtonH = 70;
 
-
-	if ((xDown > spinButtonX && xDown < (spinButtonX + spinButtonW)) && (xUp > spinButtonX && xUp < (spinButtonX + spinButtonW)) &&
-		(yDown > spinButtonY&& yDown < (spinButtonX + spinButtonH)) && (yUp > spinButtonY && yUp < (spinButtonY + spinButtonH))){
-		std::cout << "Spin button" << std::endl;
+	
+	// проверява парамети на бутона	
+	if ((xDown > spinButtonX && xDown < (spinButtonX + spinButtonW)) &&// ako xDown > 620 && xDown < 620 + 150
+		(yDown > spinButtonY && yDown < (spinButtonY + spinButtonH))){ // ako yDown > 50 && yDown < 620 + 70
+		std::cout << "Spin button clicked" << std::endl;
 			return true; // button clicked
 		}
 	return false;
 }
-//int Game::getCurrentSector() const {
-//
-//	//  броя на секторите
-//	int numSectors = sectors.size();
-//
-//	// Изчисляваме ъгъла на всяка секторна част, като разделяме 360 градуса на броя сектори.
-//	float sectorAngle = 360.0f / numSectors;
-//
-//	// Изчисляваме текущия ъгъл на завъртане, като вземаме остатъка при деление на rotationAngle на 360.
-//	float currentAngle = rotationAngle % 360;
-//
-//	// Ако текущият ъгъл е отрицателен, преобразуваме го в положителен.
-//	if (currentAngle < 0) {
-//		currentAngle += 360; // за отрицателни ъгли
-//	}
-//
-//	// Изчисляваме индекса на сектора, към който принадлежи текущия ъгъл.
-//
-//	int sectorIndex = static_cast<int>(currentAngle / sectorAngle);
-//	return sectorIndex;
-//}
+int Game::getCurrentSector() const {
+	std::vector<std::string> sectors;
+
+
+	double fmod(double x, double y);
+
+	//  броя на секторите
+	int numSectors = sectors.size();
+
+	// pроверка дали има сектори, за да избегнем грешка при делене на нула
+	if (numSectors == 0)
+		return -1; // върнете някаква стойност за грешка
+
+	// изчисляваме ъгъла на всяка секторна част, като разделяме 360 градуса на броя сектори.
+	float sectorAngle = 360.0f / numSectors;
+
+	// изчисляваме текущия ъгъл на завъртане, като вземаме остатъка при деление на rotationAngle на 360.
+	float currentAngle = rotationAngle % 360;
+
+	// Изчисляване на текущия ъгъл на завъртане
+	//float currentAngle = fmod(rotationAngle, 360.0f);
+
+	// ако текущият ъгъл е отрицателен, преобразуваме го в положителен.
+	if (currentAngle < 0) {
+		currentAngle += 360; // за отрицателни ъгли
+	}
+
+	// изчисляваме индекса на сектора, към който принадлежи текущия ъгъл.
+
+	int sectorIndex = static_cast<int>(currentAngle / sectorAngle);
+	return sectorIndex;
+}
+
+bool Game::ttf_init() {
+	if (TTF_Init() == -1) { // проверка дали инициализацията е успешна
+		return false;
+	}
+
+	TTF_Font* font = TTF_OpenFont("fonts/comic.ttf", 48); // отваря шрифт от файл с име и размер, връща указател към заредения шрифт
+	if (font == NULL) { // проверка дали зареждането на шрифта е успешно
+		return false;
+	}
+
+	SDL_Surface* tempSurfaceText = NULL; // указател за съхранение на текста
+	tempSurfaceText = TTF_RenderText_Blended(font, "Hello Word!", { 0, 0, 255, 255 }); //за да се рендира текста
+
+	textTextureFont = SDL_CreateTextureFromSurface(renderer, tempSurfaceText); //създаване на текстура
+
+	int tw, th; // променливи за съхранение на ширина и височина
+
+	SDL_QueryTexture(textTextureFont, 0, 0, &tw, &th); //извличане  ширина и височина
+	dRectFont = { 10, 10, tw,th };  // структора с парамеетри
+
+	SDL_FreeSurface(tempSurfaceText); //освобождава паметта
+	TTF_CloseFont(font); //затваря текста
+	return true;
+}
 
 
