@@ -57,34 +57,31 @@ bool Game::ttf_init() {
 		return false;
 	}
 
-	if (win){
+	if (win) {
 		SDL_Surface* tempSurfaceText = NULL; // указател за съхранение на текста
 		tempSurfaceText = TTF_RenderText_Blended(font, "You win: ", { 0, 0, 255, 255 }); //за да се рендира текста
 		textTextureFont = SDL_CreateTextureFromSurface(renderer, tempSurfaceText); //създаване на текстура
 
 
 		int tw, th; // променливи за съхранение на ширина и височина
-
 		SDL_QueryTexture(textTextureFont, 0, 0, &tw, &th); //извличане  ширина и височина
 		dRectFont = { 20, 20, tw,th };  // структора с парамеетри
 
 
-		SDL_FreeSurface(tempSurfaceText); //освобождава паметта
+		//SDL_FreeSurface(tempSurfaceText); //освобождава паметта
 		TTF_CloseFont(font); //затваря текста
 		return true; // Връщаме true, за да покажем, че инициализацията е успешна
 
+		
+	
 	}
 	return false; // Връщаме false, ако spinning не е false
 }
-
-
 
 void Game::render() {
 
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // задава цвета на прозореца
 	SDL_RenderClear(renderer);
-
-
 	SDL_RenderCopy(renderer, textTextureFont, NULL, &dRectFont);
 
 		TextureManager::Instance()->drawRotation("wheel", 0, 100, 800, 800, renderer, rotationSpeed);
@@ -127,61 +124,63 @@ void Game::handleEvents() {
 				mouseDownY = msy;
 				std::cout << "Left mouse button is down\n";
 				bool isButtonClicked = isClickableButton(clickableTexture, &clickableRect, mouseDownX, mouseDownY, msx, msy);
-				if (isButtonClicked) {  //ако бутона е натиснат, колелото се завърта
+				if (isButtonClicked && spinButtonActive) {  //ако бутона е натиснат, колелото се завърта
 					std::cout << "CLICKED SPIN\n";
 					spinning = true;
+					rotationSpeed = 10;
+					spinButtonActive = false;
 				}
-				else {
-					spinning = false;
-					std::cout << "NOT CLICKED SPIN\n";  // не е натиснат бутона
+				if (rotationSpeed <= 0) {
+					
+					spinButtonActive = true;
 				}
-
-				std::cout <<"mouseDownX " << mouseDownX << " : " <<"mouseDownY " << mouseDownY << std::endl;
-				std::cout <<"msx " << msx << "  :" << "msy " << msy << std::endl;
-			}
-			if (event.button.button == SDL_BUTTON_RIGHT) {
-				std::cout << "Right mouse button is down\n";
-			}
-		/*case SDL_MOUSEBUTTONUP: {
-			if (event.button.button == SDL_BUTTON_LEFT) {
-				SDL_GetMouseState(&msx, &msy);
-				std::cout << "Left mouse button is up\n";
-			}
-			if (event.button.button == SDL_BUTTON_RIGHT) {
-				std::cout << "Right mouse button is up\n";
-
-			}
-		}*/
-		}; break;
+				if (isButtonClicked && spinButtonActive) {  //ако бутона е натиснат, колелото се завърта
+					std::cout << "CLICKED SPIN\n";
+					spinning = true;
+					rotationSpeed = 10;
+					spinButtonActive = false;
+				}
+				
+			
+			}; break;
 
 		default: break;
 		}
+		}
+
 	}
 }
 
 
-
 void Game::update() {	
-	
+	if (spinning){
+
 		if (SDL_GetTicks() % 40 == 0) {
 			rotationSpeed -= 4;
 		}
-	
 		if (rotationSpeed <= 0) {
 			rotationSpeed = 0;
-			
-
-			spinning = false;
-			ttf_init();
 			win = true;
+			ttf_init();
+			float getCircleCoordinates(double centerX, double centerY, double sideLength);
+			std::cout << "You win: " << price << std::endl;
+			spinning = false;
+		}
+		if (rotationSpeed > 1) {
+			win = false;
+
+		}
+
+
+		
 			//int getPrice = getCurrentSector();
 			//std::cout << "sector index: " << getPrice << std::endl;
 			//winScreen("You win", winning);
 			// покажи "You win" и спечелената сума на екрана
-			std::cout << getCircleCoordinates << std::endl;
-		}
-	}
+			//std::cout << getCircleCoordinates << std::endl;
 		
+	}
+}
 	
 
 
@@ -224,72 +223,112 @@ bool Game::isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, 
 		}
 	return false;
 }
-int Game::getCurrentSector() const {
-	std::vector<std::string> sectors;
-
-
-	double fmod(double x, double y);
-
-	//  броя на секторите
-	int numSectors = sectors.size();
-
-	// pроверка дали има сектори, за да избегнем грешка при делене на нула
-	if (numSectors == 0)
-		return -1; // върнете някаква стойност за грешка
-
-	// изчисляваме ъгъла на всяка секторна част, като разделяме 360 градуса на броя сектори.
-	float sectorAngle = 360.0f / numSectors;
-
-	// изчисляваме текущия ъгъл на завъртане, като вземаме остатъка при деление на rotationAngle на 360.
-	float currentAngle = rotationAngle % 360;
-	// Изчисляване на текущия ъгъл на завъртане
-	//float currentAngle = fmod(rotationAngle, 360.0f);
-
-	// ако текущият ъгъл е отрицателен, преобразуваме го в положителен.
-	if (currentAngle < 0) {
-		currentAngle += 360; // за отрицателни ъгли
-	}
-
-	// изчисляваме индекса на сектора, към който принадлежи текущия ъгъл.
-
-	int sectorIndex = static_cast<int>(currentAngle / sectorAngle);
-	return sectorIndex;
-}
 
 
 
+//
 //void Game::winScreen(std::string massage, int winnings) {
 //	
 //	// Изобразете съобщението за печалба
 //	renderText(massage, winnings);
 //
 //	// Изобразете спечелената сума
-//	std::string winningsText = "Winnings: " + std::to_string(winnings);
+//	std::string winningsText = "Winnings: " + std::to_string(price);
 //	renderText(winningsText, xPos, xPos + 50);
 //
 //}
 
 
-void Game::getCircleCoordinates(int centerX, int centerY, int sideLength, SDL_Point* points) {
+bool Game::getCircleCoordinates(double centerX, double centerY, double sideLength) {
+	float x = 0;
+	float y = 0;
 
-	SDL_Point points[24]; // Масив за съхранение на координатите на върховете
 
-	const double angleIncrement = 2 * M_PI / 24; // Ъгълът между върховете на окръжността
+	const double  angleIncrement = 2 * M_PI / 24; // Ъгълът между върховете на окръжността
 
-	for (size_t i = 0; i < 24; ++i)
+	for (size_t i = 1; i <= 24; ++i)
 	{
-		// Изчисляване на координатите на върховете на петоъгълника
-		points[i].x = centerX + sideLength * cos(i * angleIncrement);
-		points[i].y = centerY + sideLength * sin(i * angleIncrement);
-	}
+		// Изчисляване на координатите на върховете на окръжността
+		x = centerX + sideLength * cos(i * angleIncrement - M_PI / 2);
+		y = centerY + sideLength * sin(i * angleIncrement - M_PI / 2);
 
-	getCircleCoordinates(centerX, centerY, sideLength, points);
+		if (i == 1) {
+			price = 1;
+		}
+		else if (i == 2) {
+			price += 200;
+		}
+		else if (i == 3) {
+			price += 200;
+		}
+		else if (i == 4) {
+			price += 200;
+		}
+		else if (i == 5) {
+			price += 200;
+		}
+		else if (i == 6) {
+			price += 200;
+		}
+		else if (i == 7) {
+			price += 200;
+		}
+		else if (i == 8) {
+			price += 200;
+		}
+		else if (i == 9) {
+			price += 200;
+		}
+		else if (i == 10) {
+			price += 200;
+		}
+		else if (i == 11) {
+			price += 200;
+		}
+		else if (i == 12) {
+			price += 200;
+		}
+		else if (i == 13) {
+			price += 200;
+		}
+		else if (i == 14) {
+			price += 200;
+		}
+		else if (i == 15) {
+			price += 200;
+		}
+		else if (i == 16) {
+			price += 200;
+		}
+		else if (i == 17) {
+			price += 200;
+		}
+		else if (i == 18) {
+			price += 200;
+		}
+		else if (i == 19) {
+			price += 200;
+		}
+		else if (i == 20) {
+			price += 200;
+		}
+		else if (i == 21) {
+			price += 200;
+		}
+		else if (i == 22) {
+			price += 200;
+		}
+		else if (i == 23) {
+			price += 200;
+		}
+		else if (i == 24) {
+			price += 200;
+		}
 
-	// Сега points съдържа координатите на върховете на окръжността
-	for (int i = 0; i < 24; ++i) {
-		std::cout << "Point " << i << ": (" << points[i].x << ", " << points[i].y << ")" << std::endl;
-	}
+	}return price = 100;
 }
+
+
 
 
 

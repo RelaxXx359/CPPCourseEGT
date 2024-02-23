@@ -29,12 +29,15 @@ public:
 	//bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 
 	bool isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
-	int getCurrentSector() const;
+	bool getCircleCoordinates(double centerX, double centerY, double sideLength);
+
 
 	//void winScreen(std::string, int);
 
 
-	 void getCircleCoordinates(int centerX, int centerY, int sideLength, SDL_Point* points);
+
+
+	//float angleCodinati(std::string text, int x, int y);
 
 private:
 
@@ -50,16 +53,22 @@ private:
 
 
 	int CenterX, CenterY ;
-	bool spinning = false; // Флаг, показващ дали колелото се върти
-	bool win = false;
-	int rotationAngle; // Текущ ъгъл на въртене на колелото
-	//float rotationSpeed; // Скорост на въртене на колелото
-	float rotationSpeed = 10;
-	bool anim_state = false;
+	bool spinning = false; // Флаг показващ дали колелото се върти
+	bool spinButtonActive = true; //Флаг покозващ дали бутона е активен
+
+	bool win = false; // Флаг показващ дали да изпише текст "You win"
+
+ 	//int rotationAngle; // Текущ ъгъл на въртене на колелото
+	float rotationSpeed; // Скорост на въртене на колелото
+	//bool anim_state = false;
 
 	SDL_Texture* clickableTexture;
 	SDL_Rect clickableRect;
 	int mouseDownX, mouseDownY;
+
+	float price;
+	double angleIncrement;
+
 
 
 };
