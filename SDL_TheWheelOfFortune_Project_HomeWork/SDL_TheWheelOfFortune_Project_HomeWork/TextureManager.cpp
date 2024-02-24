@@ -1,4 +1,4 @@
-﻿#include "TextureManager.h"
+﻿  #include "TextureManager.h"
 
 bool TextureManager::loadTexture(const char* fileName, std::string id, SDL_Renderer* ren) {
 
