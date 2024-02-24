@@ -29,15 +29,16 @@ public:
 	//bool isClickableTextureClicked(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 
 	bool isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
-	bool getCircleCoordinates(double centerX, double centerY, double sideLength);
+	float getCircleCoordinates(double centerX, double centerY, double sideLength);
 
 
 	//void winScreen(std::string, int);
 
 
+	//float calculatePriceForVertex(double x, double y);
 
 
-	//float angleCodinati(std::string text, int x, int y);
+	float calculatePrice(double x, double y);
 
 private:
 
@@ -52,23 +53,26 @@ private:
 	int currentFrame;
 
 
-	int CenterX, CenterY ;
+	int centerX, centerY, sideLength;
 	bool spinning = false; // Флаг показващ дали колелото се върти
 	bool spinButtonActive = true; //Флаг покозващ дали бутона е активен
 
-	bool win = false; // Флаг показващ дали да изпише текст "You win"
 
- 	//int rotationAngle; // Текущ ъгъл на въртене на колелото
+	bool win = false; // Флаг показващ дали да изпише текст "You win"
+	bool nonwin = false;
+	bool winDelete = true;
+
 	float rotationSpeed; // Скорост на въртене на колелото
-	//bool anim_state = false;
 
 	SDL_Texture* clickableTexture;
 	SDL_Rect clickableRect;
 	int mouseDownX, mouseDownY;
 
-	float price;
-	double angleIncrement;
-
+	//float price;
+	//double angleIncrement;
+	float markerX, markerY;
+	float x, y;
+	int price;
 
 
 };
