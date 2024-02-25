@@ -87,7 +87,7 @@ void Game::render() {
 			TextureManager::Instance()->drawTexture("spin2", 670, 20, 150, 70, renderer);
 		}
 		// arrow
-		TextureManager::Instance()->drawTexture("arrow", 400, 20, 100, 70, renderer);
+		TextureManager::Instance()->drawTexture("arrow", 423, 25, 100, 70, renderer);
 
 		int ww, wh;
 		SDL_GetWindowSize(window, &ww, &wh);           // присвоява ширината и височината на прозореца на ww и wh
@@ -151,28 +151,35 @@ void Game::handleEvents() {
 	}
 }
 std::pair<float, float> Game::getCircleCoordinates(double markerX, double markerY, double centerX, double centerY, double sideLength) {
-	const double angleIncrement =  2 * M_PI / 24; // Ъгълът между върховете на окръжността
+	const double angleIncrement =  360 / 24; // Ъгълът между върховете на окръжността  // 15
 
 	// изчисляване на ъгъла на маркера спрямо центъра на окръжността
-	float angleToMarker = atan2(x, y) * (180 / M_PI);
-	if (angleToMarker <= 0) {
-		angleToMarker += 360; // ako ъгъла е отрицателно число
-	}
+	//float angleToMarker = atan2(markerY - centerY, markerX - centerX) * (180 / M_PI);
+	//if (angleToMarker < 0) {
+	//	angleToMarker += 360; // ako ъгъла е отрицателно число
+	//}
 
-	// Изчисляване на индекса на върха, на който се намира маркера
-	int sectorIndex = static_cast<int>(angleToMarker / angleIncrement) +1;
+	//// Изчисляване на индекса на върха, на който се намира маркера   
+	//int sectorIndex = static_cast<int>(angleToMarker / angleIncrement) ;   // 0
 
-	// Изчисляване на координатите на сектора
-	float sectorAngle = sectorIndex * angleIncrement;
+	//// Изчисляване на координатите на сектора
+	//float sectorAngle = sectorIndex * angleIncrement;
 
-	float x = centerX + sideLength * cos(sectorAngle);
-	float y = centerY + sideLength * sin(sectorAngle);
+	//float x = centerX + sideLength * cos(sectorAngle);
+	//float y = centerY + sideLength * sin(sectorAngle);
+
+	double distance = sqrt(pow(markerX - centerX, 2) + pow(markerY - centerY, 2));
+
+		float x = centerX + sideLength * cos(angleIncrement - 360 / 2);
+	    float y = centerY + sideLength * sin(angleIncrement - 360 / 2);
+	
 
 	return std::make_pair(x, y);
 }
-double Game::calculateSectorSum(double angleToMarker) {
+int Game::currentSector(int angleToMarker) {
+
 	// Определяне на номера на сектора в зависимост от ъгъла на маркера
-	int sectorNumber = static_cast<int>((angleToMarker / (2 * M_PI / 24))) ;
+	int sectorNumber = static_cast<int>((angleToMarker / (360 / 24)));
 
 	// проверка каква е сумата на sectorNumer
 	switch (sectorNumber) {
@@ -248,8 +255,8 @@ double Game::calculateSectorSum(double angleToMarker) {
 	case 24:
 		return  750;
 
-	defalt:
-		return -1;
+	default:
+		return false;
 	}
 }
 
@@ -277,7 +284,7 @@ void Game::update() {
 			auto result = Game::getCircleCoordinates(markerX, markerY, centerX, centerY, sideLength);
 			std::cout << "Coordinates of the marker on the circle: (" << result.first << ", " << result.second << ")\n";
 			std::cout << markerX << ":" << markerY << ":" << centerX << ":" << centerY << ":" << sideLength << std::endl;
-			
+
 		}
 		else {
 			win = false;   // скриване на текста You win..
@@ -315,7 +322,7 @@ Game::Game() {
 	Game::window = NULL;
 	Game::renderer = NULL;
 	Game::running = true;
-	markerX = markerY = 23;
+	
 
 }
 Game::~Game() {
