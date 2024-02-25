@@ -28,11 +28,13 @@ public:
 	bool isClickableButton(SDL_Texture* t, SDL_Rect* r, int xDown, int yDown, int xUp, int yUp);
 	std::pair<float, float> getCircleCoordinates(double markerX, double markerY, double centerX, double centerY, double sideLength);
 
-	//float calculatePriceForVertex(double x, double y);
+	//int  getSectorValue(float x, float y);
 
-	int  getSectorValue(float x, float y);
+	//double getWheelAngle(double rotationSpeed, double time);
 
-	double getWheelAngle(double rotationSpeed, double time);
+	//double getSectorIndex(double angle, int numSectors); 
+
+	double calculateSectorSum(double angleToMarker);
 
 
 private:
@@ -66,7 +68,8 @@ private:
 	int price;
 	double time;
 	double rotation;
-
+	double angle;
+	int numSectors;
 
 };
 
