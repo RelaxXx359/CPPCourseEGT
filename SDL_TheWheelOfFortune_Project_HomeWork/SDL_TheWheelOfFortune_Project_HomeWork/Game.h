@@ -32,6 +32,9 @@ public:
 
 	int  getSectorValue(float x, float y);
 
+	double getWheelAngle(double rotationSpeed, double time);
+
+
 private:
 
 	SDL_Window* window = NULL;
@@ -50,7 +53,7 @@ private:
 	bool spinButtonActive = true; //Флаг покозващ дали бутона е активен
 
 	bool win = false; // Флаг показващ дали да изпише текст "You win"
-	bool nonwin = false;
+	//bool nonwin = false;
 
 	float rotationSpeed; // Скорост на въртене на колелото
 
@@ -61,6 +64,8 @@ private:
 	float markerX, markerY;
 	float x, y;
 	int price;
+	double time;
+	double rotation;
 
 
 };
