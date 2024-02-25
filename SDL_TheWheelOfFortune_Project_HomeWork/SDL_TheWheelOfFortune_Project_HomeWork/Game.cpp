@@ -87,7 +87,7 @@ void Game::render() {
 			TextureManager::Instance()->drawTexture("spin2", 670, 20, 150, 70, renderer);
 		}
 		// arrow
-		TextureManager::Instance()->drawTexture("arrow", 423, 25, 100, 70, renderer);
+		TextureManager::Instance()->drawTexture("arrow", 400, 25, 100, 70, renderer);
 
 		int ww, wh;
 		SDL_GetWindowSize(window, &ww, &wh);           // присвоява ширината и височината на прозореца на ww и wh
@@ -154,16 +154,16 @@ std::pair<float, float> Game::getCircleCoordinates(double markerX, double marker
 	const double angleIncrement =  360 / 24; // Ъгълът между върховете на окръжността  // 15
 
 	// изчисляване на ъгъла на маркера спрямо центъра на окръжността
-	//float angleToMarker = atan2(markerY - centerY, markerX - centerX) * (180 / M_PI);
-	//if (angleToMarker < 0) {
-	//	angleToMarker += 360; // ako ъгъла е отрицателно число
-	//}
+	float angleToMarker = atan2(markerY - centerY, markerX - centerX) * (180 / M_PI);
+	if (angleToMarker < 0) {
+		angleToMarker += 360; // ako ъгъла е отрицателно число
+	}
 
 	//// Изчисляване на индекса на върха, на който се намира маркера   
-	//int sectorIndex = static_cast<int>(angleToMarker / angleIncrement) ;   // 0
+	int sectorIndex = static_cast<int>(angleToMarker / angleIncrement) ;   // 0
 
 	//// Изчисляване на координатите на сектора
-	//float sectorAngle = sectorIndex * angleIncrement;
+	float sectorAngle = sectorIndex * angleIncrement;
 
 	//float x = centerX + sideLength * cos(sectorAngle);
 	//float y = centerY + sideLength * sin(sectorAngle);
