@@ -1,0 +1,5 @@
+﻿  Game.cpp
+D:\GITHUB\SDL_TheWheelOfFortune_Project_HomeWork\SDL_TheWheelOfFortune_Project_HomeWork\Game.cpp(83,82): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+D:\GITHUB\SDL_TheWheelOfFortune_Project_HomeWork\SDL_TheWheelOfFortune_Project_HomeWork\Game.cpp(173,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+D:\GITHUB\SDL_TheWheelOfFortune_Project_HomeWork\SDL_TheWheelOfFortune_Project_HomeWork\Game.cpp(174,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  SDL_TheWheelOfFortune_Project_HomeWork.vcxproj -> D:\GITHUB\SDL_TheWheelOfFortune_Project_HomeWork\x64\Debug\SDL_TheWheelOfFortune_Project_HomeWork.exe
